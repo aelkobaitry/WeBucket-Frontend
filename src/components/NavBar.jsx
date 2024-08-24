@@ -10,17 +10,13 @@ export default function NavBar() {
    * @param {MouseEvent} event onClick event
    */
   const handleProfileClick = (event) => {
-    console.log(event.target);
+    // This will pull up account/profile data when called
   }
 
   return (
-    <nav className="nav-bar">
-      <div className="left">
-        <img src="src/assets/hamburger_left.svg" alt="hamburger-menu" className="hamburger-icon" />
-      </div>
-      <div className="right">
-        <img src={/* Profile Picture */''} alt="profile-picture" className="pfp" onClick={handleProfileClick}/>
-      </div>
+    <nav className="flex justify-between">
+      <img src="src/assets/hamburger-left.svg" alt="hamburger-menu" className="w-10 cursor-pointer duration-300 hover:scale-110" />
+      <img src={"src/assets/base-pfp.svg"} alt="profile-picture" className="w-10 cursor-pointer duration-300 hover:scale-110" onClick={handleProfileClick}/>
     </nav>
   );
 }
