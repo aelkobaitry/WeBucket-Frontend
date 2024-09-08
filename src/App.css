@@ -15,26 +15,6 @@
   color: var(--light-purple);
 }
 
-.add-card {
-  border: 3px solid var(--dark-purple);
-  background-color: #4D3052;
-  border-radius: 1rem;
-  filter: drop-shadow(0px 2px 8px var(--dark-purple));
-}
-.add-card:hover {
-  background-color: var(--medium-purple);
-}
-.card:hover {
-  transform: scale(105%);
-  background-color: var(--light-purple);
-}
-.card:nth-child(2) {
-  margin-top: -1.5rem !important;
-}
-.card:not(:first-child) {
-  margin-top: -6.7rem;
-}
-
 /* Checklist Page Styles */
 .title {
   padding: 1rem 1rem;

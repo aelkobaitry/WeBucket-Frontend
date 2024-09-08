@@ -47,8 +47,8 @@ export default function ChecklistPage() {
   };
 
   return (
-    <div className="container">
-      <NavBar blur={blur} />
+    <div className="bg-dark-purple min-h-screen">
+      <NavBar />
       {addCard && (
         <AddCard
           expand={true}

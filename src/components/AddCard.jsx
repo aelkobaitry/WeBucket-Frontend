@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 export default function AddCard({ onClick, expand, type, style }) {
   const defaultCard = (
     <div
-      className="add-card grid grid-rows-1 mt-0 pl-4 pt-4 pr-4 pb-8 z-0 duration-300 cursor-pointer"
+      className="grid grid-rows-1 mt-0 pl-4 pt-4 pr-4 pb-8 z-0 bg-medium-dark-purple duration-300 cursor-pointer border-solid border-4 border-dark-purple rounded-2xl drop-shadow-card hover:bg-medium-purple"
       onClick={onClick}
     >
       <div className="flex justify-between pointer-events-none">
@@ -23,7 +23,7 @@ export default function AddCard({ onClick, expand, type, style }) {
 
   const expandedCard = (
     <div
-      className="add-card grid grid-rows-1 mt-0 pl-4 pt-4 pr-4 pb-4 z-0 duration-300"
+      className="grid grid-rows-1 mt-0 pl-4 pt-4 pr-4 pb-4 z-0 border-solid border-4 border-dark-purple rounded-2xl duration-300"
       onClick={onClick}
       style={style}
     >

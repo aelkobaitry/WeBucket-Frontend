@@ -24,7 +24,7 @@ export default function Card(props) {
 
   const standardCard = (
     <div
-      className="card flex flex-col mt-0 p-4 z-0 cursor-pointer translate-x-0 translate-y-0 duration-300"
+      className="card flex flex-col mt-0 p-4 z-0 cursor-pointer translate-x-0 translate-y-0 duration-300 hover:scale-105 hover:bg-light-purple [&:nth-child(2)]:-mt-6 [&:not(:first-child)]:mt-card"
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onLeave}
