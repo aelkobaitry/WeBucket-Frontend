@@ -47,7 +47,7 @@ export default function ChecklistPage() {
   };
 
   return (
-    <div className="bg-dark-purple min-h-screen">
+    <div className="bg-dark-purple min-h-screen p-8">
       <NavBar />
       {addCard && (
         <AddCard
