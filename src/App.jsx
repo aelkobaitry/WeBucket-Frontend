@@ -6,14 +6,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import { RequireToken } from "./Auth";
 import Login from "./components/Login";
-import ChecklistPage from "./pages/ChecklistPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <ChecklistPage />
+        <Stars />
       </>
     ),
     errorElement: <ErrorPage />,
