@@ -1,11 +1,35 @@
 import DateCountdown from "react-date-countdown-timer";
 import logo from "../assets/Logo.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchToken } from "../Auth";
 
 const IncomingPage = () => {
   const [showContact, setShowContact] = useState(false);
   const allowContact = () => {
     setShowContact(true);
+  };
+  const [tester, setTester] = useState({ email: "nothing" });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("fetching");
+    fetch("http://localhost:8000/api/v1/auth/current_user", {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setTester(data))
+      .catch((error) => console.error(error));
+    console.log(tester);
+  }, []);
+
+  const signOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -18,6 +42,7 @@ const IncomingPage = () => {
           locales={[":", ":", ":", ":", ":"]}
           locales_plural={[":", ":", ":", ":", ":"]}
         />
+        {tester.email}
       </div>
       <a
         class="text-[#A778AF] font-light text-xl pt-64"
@@ -75,6 +100,12 @@ const IncomingPage = () => {
           </form>
         </div>
       ) : null}
+      <button
+        className="w-full p-2 mt-4 text-neutral-300 bg-purple-950"
+        onClick={signOut}
+      >
+        signout
+      </button>
     </div>
   );
 };
