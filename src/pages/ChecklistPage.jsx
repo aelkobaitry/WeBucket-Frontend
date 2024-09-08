@@ -86,13 +86,13 @@ export default function ChecklistPage() {
         onClick={blur ? minimize : undefined}
       >
         <div className="header">
-          <h1 className="title">Person1 and Person2&apos;s Checklist</h1>
+          <h1 className="font-title p-4">Person1 and Person2&apos;s Checklist</h1>
           <h4 className="pl-10 pt-3">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
             pulvinar, justo non fringilla mollis, lacus nibh.
           </h4>
-          <div className="checklists-tabs flex pt-8">
-            <div className="incomplete-tab relative w-28 h-auto text-center duration-300 cursor-pointer z-10">
+          <div className="text-sm flex pt-8">
+            <div className="text-dark-purple relative w-28 h-auto text-center duration-300 cursor-pointer z-10">
               <p className="tab-text absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
                 Incomplete
               </p>
@@ -102,7 +102,7 @@ export default function ChecklistPage() {
                 className="absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2"
               />
             </div>
-            <div className="complete-tab relative w-28 h-auto -left-8 text-center duration-300 cursor-pointer z-0">
+            <div className="text-white relative w-28 h-auto -left-8 text-center duration-300 cursor-pointer z-0">
               <p className="tab-text absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
                 Complete
               </p>

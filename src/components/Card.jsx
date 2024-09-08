@@ -24,17 +24,17 @@ export default function Card(props) {
 
   const standardCard = (
     <div
-      className="card flex flex-col mt-0 p-4 z-0 cursor-pointer translate-x-0 translate-y-0 duration-300 hover:scale-105 hover:bg-light-purple [&:nth-child(2)]:-mt-6 [&:not(:first-child)]:mt-card"
+      className="card flex flex-col mt-0 p-4 z-0 cursor-pointer translate-x-0 translate-y-0 bg-medium-purple border-solid border-3 border-dark-purple rounded-2xl drop-shadow-card duration-300 hover:scale-105 hover:bg-light-purple [&:nth-child(2)]:-mt-6 [&:not(:first-child)]:mt-card"
       onClick={props.onClick}
       onMouseEnter={props.onHover}
       onMouseLeave={props.onLeave}
       style={props.style}
     >
       <div className="flex justify-between pointer-events-none">
-        <h2 className="card-title font-bold whitespace-nowrap overflow-hidden overflow-ellipsis">
+        <h2 className="text-dark-purple drop-shadow-card-title font-bold whitespace-nowrap overflow-hidden overflow-ellipsis">
           {props.title}
         </h2>
-        <div className="location flex items-center">
+        <div className="text-medium-dark-purple flex items-center">
           {props.location && (
             <img
               src="src/assets/location-icon.svg"
@@ -68,12 +68,12 @@ export default function Card(props) {
       )}
       <div className="!mb-0 ml-auto">
         <button
-          className="edit-btn max-h-16 text-medium-dark-purple pt-2 pb-2 pl-6 pr-6"
+          className="bg-transparent rounded-full drop-shadow-btn max-h-16 text-white ml-auto !mb-0 pt-2 pb-2 pl-6 pr-6 max-h-16 text-medium-dark-purple pt-2 pb-2 pl-6 pr-6"
         >
           <u>Edit</u>
         </button>
         <button
-          className="complete-btn max-h-16 text-white pt-2 pb-2 pl-6 pr-6"
+          className="bg-dark-purple text-white rounded-full drop-shadow-btn max-h-16 text-white pt-2 pb-2 pl-6 pr-6"
           onClick={() => {
             setComplete(true);
           }}
@@ -104,12 +104,12 @@ export default function Card(props) {
         task.
       </p>
       <div className="block bg-white rounded-lg mb-4">
-        <textarea className="user-feedback"></textarea>
+        <textarea className="user-feedback w-full h-1/2 p-1.5 rounded-lg shadow-input text-medium-dark-purple"></textarea>
         <hr />
-        <textarea className="user-feedback"></textarea>
+        <textarea className="user-feedback w-full h-1/2 p-1.5 rounded-lg shadow-input text-medium-dark-purple"></textarea>
       </div>
       <button
-        className="complete-btn max-h-16 text-white ml-auto !mb-0 pt-2 pb-2 pl-6 pr-6"
+        className="bg-dark-purple text-white rounded-full drop-shadow-btn max-h-16 text-white ml-auto !mb-0 pt-2 pb-2 pl-6 pr-6"
         onClick={() => finish()}
       >
         Complete

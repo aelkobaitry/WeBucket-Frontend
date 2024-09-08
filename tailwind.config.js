@@ -4,10 +4,21 @@ export default {
   theme: {
     extend: {
       "dropShadow": {
-        "card": "0px 2px 8px #000421"
+        "card": "0px 2px 8px #000421",
+        "card-title": "-4px 4px 10px rgba(0, 0, 0, 0.25)",
+        "btn": "0px 4px 4px rgba(0, 0, 0, 0.25)"
       },
       "spacing": {
         "card": "-6.7rem"
+      },
+      "boxShadow": {
+        "input": "inset 0 0 3px #000421"
+      },
+      "fontFamily": {
+        "title": ["righteous", "sans-serif"]
+      },
+      "borderWidth": {
+        "3": "3px"
       }
     },
     colors: {

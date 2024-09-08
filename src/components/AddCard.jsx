@@ -4,16 +4,17 @@ import PropTypes from "prop-types";
  * Represents a Card of information about a task. When expanded, more information will appear.
  * @param {function} onClick onClick listener function
  * @param {boolean} expand true if this card is expanded
+ * @param {object} style applied if any additional styles are needed
  * @returns {JSX.Element} Card Element
  */
-export default function AddCard({ onClick, expand, type, style }) {
+export default function AddCard({ onClick, expand, style }) {
   const defaultCard = (
     <div
       className="grid grid-rows-1 mt-0 pl-4 pt-4 pr-4 pb-8 z-0 bg-medium-dark-purple duration-300 cursor-pointer border-solid border-4 border-dark-purple rounded-2xl drop-shadow-card hover:bg-medium-purple"
       onClick={onClick}
     >
       <div className="flex justify-between pointer-events-none">
-        <h2 className="card-title">
+        <h2 className="text-dark-purple drop-shadow-card-title font-bold whitespace-nowrap overflow-hidden overflow-ellipsis">
           <b>Add Task</b>
         </h2>
         <img src="src/assets/plus-icon.svg" alt="plus-icon" />
@@ -28,7 +29,7 @@ export default function AddCard({ onClick, expand, type, style }) {
       style={style}
     >
       <div className="flex">
-        <h2 className="card-title">
+        <h2 className="text-dark-purple drop-shadow-card-title font-bold whitespace-nowrap overflow-hidden overflow-ellipsis">
           <b>Add Task</b>
         </h2>
         <img src="src/assets/plus-icon.svg" alt="plus-icon" />
@@ -36,7 +37,8 @@ export default function AddCard({ onClick, expand, type, style }) {
       <label htmlFor="input-title">Title</label>
       <input id="input-title"></input>
       <label htmlFor="input-description">Description</label>
-      <textarea id="input-description" className="input-description" />
+      <textarea id="input-description" className="p-1.5 rounded-lg shadow-input text-medium-dark-purple" />
+    {/*}*/}
       <label htmlFor="input-location">Location</label>
       <input id="input-location" />
       <label htmlFor="input-images">Images (Optional)</label>
@@ -55,6 +57,7 @@ export default function AddCard({ onClick, expand, type, style }) {
   AddCard.propTypes = {
     onClick: PropTypes.func,
     expand: PropTypes.bool.isRequired,
+    style: PropTypes.object
   };
 
   return expand ? expandedCard : defaultCard;
