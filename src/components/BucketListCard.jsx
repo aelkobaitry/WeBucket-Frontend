@@ -8,7 +8,10 @@ import pizza from "../assets/icons/pizza.png";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import SettingsModal from "./BucketSettingsModal";
 
-const BucketListCard = ({ title, description }) => {
+const BucketListCard = React.memo(function (props) {
+  const { data, dataIndex } = props;
+  const { title, description } = data[dataIndex];
+  
   const [cardTitle, setCardTitle] = useState(title);
   const [cardDescription, setCardDescription] = useState(description);
 
@@ -149,6 +152,6 @@ const BucketListCard = ({ title, description }) => {
       </Modal>
     </div>
   );
-};
+});
 
 export default BucketListCard;

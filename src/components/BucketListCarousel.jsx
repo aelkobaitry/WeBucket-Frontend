@@ -1,10 +1,9 @@
 import React, { useRef } from "react";
 import BucketListCard from "./BucketListCard";
-import "@mantine/core/styles.css";
-import { MantineProvider } from "@mantine/core";
-import "@mantine/carousel/styles.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import right from "../assets/icons/rightarrow.png";
+import left from "../assets/icons/leftarrow.png";
 
 import {
   StackedCarousel,
@@ -14,22 +13,16 @@ import { Fab } from "@mui/material";
 import { items } from "../constants/MockData";
 
 const BucketListCarousel = () => {
-  const data = items;
   const ref = useRef();
 
   return (
-    // <MantineProvider>
     <div class="flex justify-center items-center h-screen w-screen bg-midnight">
       <ResponsiveContainer
         carouselRef={ref}
         render={(parentWidth, carouselRef) => {
-          // If you want to use a ref to call the method of StackedCarousel, you cannot set the ref directly on the carousel component
-          // This is because ResponsiveContainer will not render the carousel before its parent's width is determined
-          // parentWidth is determined after your parent component mounts. Thus if you set the ref directly it will not work since the carousel is not rendered
-          // Thus you need to pass your ref object to the ResponsiveContainer as the carouselRef prop and in your render function you will receive this ref object
           let currentVisibleSlide = 5;
-        //   if (parentWidth <= 1440) currentVisibleSlide = 3;
-        //   if (parentWidth <= 1080) currentVisibleSlide = 1;
+          //   if (parentWidth <= 1440) currentVisibleSlide = 3;
+          //   if (parentWidth <= 1080) currentVisibleSlide = 1;
           return (
             <StackedCarousel
               ref={carouselRef}
@@ -49,28 +42,27 @@ const BucketListCarousel = () => {
       />
       <>
         <Fab
-          style={{ position: "absolute", top: "40%", left: 10, zIndex: 10 }}
+          style={{ position: "absolute", top: "50%", left: 10, zIndex: 10 }}
           size="small"
           color="primary"
           onClick={() => {
             ref.current?.goBack();
           }}
         >
-          <ArrowBackIcon />
+          <img src={left} />{" "}
         </Fab>
         <Fab
-          style={{ position: "absolute", top: "40%", right: 10, zIndex: 10 }}
+          style={{ position: "absolute", top: "50%", right: 10, zIndex: 10 }}
           size="small"
-          color="primary"
+          color="transparent"
           onClick={() => {
             ref.current?.goNext(6);
           }}
         >
-          <ArrowForwardIcon />
+          <img src={right} />{" "}
         </Fab>
       </>
     </div>
-    //  </MantineProvider>
   );
 };
 
