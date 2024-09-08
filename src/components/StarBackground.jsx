@@ -25,19 +25,6 @@ const StarBackground = () => {
       return () => clearInterval(interval);
     }, []);
 
-    // useEffect(() => {
-    //     const updateInterval = setInterval(() => {
-    //       setStars((prevStars) =>
-    //         prevStars.map((star) => ({
-    //           ...star,
-    //           y: star.y + 0.01, // Increment the y position to make the star fall
-    //         }))
-    //       );
-    //     }, 100); // Adjust time to control the speed of falling
-    
-    //     return () => clearInterval(updateInterval);
-    //   }, []);
-
     return (
         <div className="absolute w-full h-full overflow-hidden">
         {stars.map(star => (

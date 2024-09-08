@@ -39,6 +39,7 @@ export default {
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
+        righteous: ["Righteous"]
     },
     keyframes: {
       fall: {

@@ -51,7 +51,7 @@ const BucketListCard = ({ title, description }) => {
 
   return (
     <div class="relative">
-      <Card class="bg-mainPurple w-[270px] h-[390px] rounded-[30px]">
+      <Card class="bg-mainPurple w-[270px] h-[390px] rounded-[30px] m-10">
         <div class="flex justify-between p-2">
           <IconButton
             disableRipple
@@ -99,7 +99,7 @@ const BucketListCard = ({ title, description }) => {
             />
           </div>
         </div>
-        <h1 class="text-2xl text-midnight ml-5 mt-2 overflow-hidden line-clamp-1 mr-4">
+        <h1 class="text-2xl font-righteous text-midnight ml-5 mt-2 overflow-hidden line-clamp-1 mr-4">
           {cardTitle}
         </h1>
         <div class="w-[230px] h-[75px] flex justify-start items-start mx-auto mb-1.5">
