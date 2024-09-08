@@ -1,8 +1,93 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  width: 100vw;
+  min-height: 100vh;
+  text-align: left;
+  font-family: 'ubuntu', 'sans-serif';
+
+  /* Colors */
+  --light-purple: #D48AE0;
+  --medium-purple: #7B4F82;
+  --medium-dark-purple: #4D3052;
+  --dark-purple: #000421;
+
+  color: var(--light-purple);
+}
+
+.add-card {
+  border: 3px solid var(--dark-purple);
+  background-color: #4D3052;
+  border-radius: 1rem;
+  filter: drop-shadow(0px 2px 8px var(--dark-purple));
+}
+.add-card:hover {
+  background-color: var(--medium-purple);
+}
+.card:hover {
+  transform: scale(105%);
+  background-color: var(--light-purple);
+}
+.card:nth-child(2) {
+  margin-top: -1.5rem !important;
+}
+.card:not(:first-child) {
+  margin-top: -6.7rem;
+}
+
+/* Checklist Page Styles */
+.title {
+  padding: 1rem 1rem;
+  font-family: 'righteous', 'serif';
+}
+
+/* Navigation Bar Styles */
+.plus-svg {
+  transition-duration: 0.3s;
+}
+.plus-svg:hover {
+  fill: white; /* TODO: Doesn't Work */
+}
+.checklists-tabs {
+  font-size: 0.8rem;
+}
+.tab:hover {
+  /* TODO: Tab hover event(s) */
+}
+.incomplete-tab {
+  color: var(--dark-purple);
+}
+.complete-tab {
+  color: white;
+}
+
+
+/* Card.jsx Styles */
+.card {
+  background: var(--medium-purple);
+  border: 3px solid var(--dark-purple);
+  border-radius: 1rem;
+  filter: drop-shadow(0px 2px 8px var(--dark-purple));
+}
+.blur {
+  filter: blur(10px);
+}
+.card-title {
+  color: var(--dark-purple);
+  filter: drop-shadow(-4px 4px 10px rgba(0, 0, 0, 0.25));
+}
+.location {
+  color: #340732;
+}
+.complete-btn {
+  background-color: var(--dark-purple);
+  border-radius: 100px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.edit-btn {
+  background-color: transparent;
+  border-radius: 100px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .logo {
