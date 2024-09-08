@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    h1 {
+        @apply text-5xl leading-tight;
+    }
+    h2 {
+        @apply text-2xl
+    }
+    p {
+        @apply text-dark-purple
+    }
+    input {
+        @apply p-1.5 rounded-lg text-medium-dark-purple shadow-input
+    }
+    label {
+        @apply mt-4 text-dark-purple
+    }
+}
+
 * {
     scroll-behavior: smooth;
   }
+
+input::file-selector-button {
+    margin: 0.2rem;
+    padding: 0.5rem;
+    background-color: var(--medium-purple);
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
