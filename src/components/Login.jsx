@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Navigate } from "react-router-dom";
 import { fetchToken, setToken } from "../Auth";
 
 function Login() {
@@ -12,7 +12,6 @@ function Login() {
     await login();
   };
 
-  //check to see if the fields are not empty
   const login = async () => {
     if (username == null || password == null) {
       return;
@@ -39,11 +38,14 @@ function Login() {
   };
 
   return (
-    <div class="flex flex-col items-center justify-center pt-60">
+    <div className="flex flex-col items-center justify-center">
       {fetchToken() ? (
-        <p>you are logged in</p>
+        <Navigate to={"/home"} />
       ) : (
-        <form class="text-[#A778AF] font-light text-xl" onSubmit={handleSubmit}>
+        <form
+          className="text-[#A778AF] font-light text-xl"
+          onSubmit={handleSubmit}
+        >
           Login ({username} - {password})
           <div className="grid w-full gap-4 py-2 md:grid-cols-2">
             <div className="flex flex-col">

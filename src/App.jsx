@@ -10,22 +10,16 @@ import Login from "./components/Login";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <Stars />
-      </>
-    ),
+    element: <Stars />,
     errorElement: <ErrorPage />,
   },
   {
     path: "home",
     element: (
-      <>
-        <RequireToken>
-          <IncomingPage />
-          <Stars />
-        </RequireToken>
-      </>
+      <RequireToken>
+        <IncomingPage />
+        <Stars />
+      </RequireToken>
     ),
     errorElement: <ErrorPage />,
   },

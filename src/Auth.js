@@ -1,26 +1,28 @@
-import { useLocation, Navigate } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export const setToken = (token) => {
-  localStorage.setItem("token", token); // make up your own token
+  localStorage.setItem("token", token);
 };
 
-export const fetchToken = (token) => {
+export const fetchToken = () => {
   return localStorage.getItem("token");
 };
 
-// export const signOut = () => {
-//   localStorage.removeItem("token");
-//   navigate("/");
-// };
+export const deleteToken = () => {
+  localStorage.removeItem("token");
+};
 
 export function RequireToken({ children }) {
   let auth = fetchToken();
   const navigate = useNavigate();
 
-  if (!auth) {
-    navigate("/login");
-  }
+  useEffect(() => {
+    if (!auth) {
+      console.log("No token found");
+      navigate("/login");
+    }
+  }, []);
 
   return children;
 }
