@@ -1,22 +1,34 @@
+import logo from "../assets/Logo.svg";
+import profilePic from "../assets/base-pfp.svg";
+import { useNavigate } from "react-router-dom";
+
 /**
  * Represents a Navigation Bar. There are two elements in this nav bar, which are the hamburger menu and profile picture.
  * @returns {JSX.Element}
  * @constructor
  */
 export default function NavBar() {
+  const navigate = useNavigate();
 
   /**
    * Handles a user click of their profile picture.
    * @param {MouseEvent} event onClick event
    */
   const handleProfileClick = (event) => {
-    // This will pull up account/profile data when called
-  }
+    navigate("/profile");
+  };
 
   return (
-    <nav className="flex justify-between">
-      <img src="src/assets/hamburger-left.svg" alt="hamburger-menu" className="w-10 cursor-pointer duration-300 hover:scale-110" />
-      <img src={"src/assets/base-pfp.svg"} alt="profile-picture" className="w-10 cursor-pointer duration-300 hover:scale-110" onClick={handleProfileClick}/>
+    <nav className="fixed top-0 flex justify-between w-full start-0">
+      <a href="https://we-bucket.com/" className="flex items-center">
+        <img src={logo} className="w-14 mt-11 ml-11" alt="WeBucket Logo" />
+      </a>
+      <img
+        src={profilePic}
+        alt="profile-picture"
+        className="mt-10 duration-300 cursor-pointer w-14 mr-11 hover:scale-110"
+        onClick={handleProfileClick}
+      />
     </nav>
   );
 }
