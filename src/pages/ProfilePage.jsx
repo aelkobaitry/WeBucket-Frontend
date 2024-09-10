@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchToken, deleteToken } from "../Auth";
 
-const Profile = () => {
+const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
@@ -69,4 +69,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { fetchToken, setToken } from "../Auth";
 
-function Login() {
+function LoginPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
@@ -79,4 +79,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

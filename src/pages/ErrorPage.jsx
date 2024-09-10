@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import Stars from "./Stars";
+import Stars from "../components/Stars";
 import logo from "../assets/Logo.svg";
 
 function ErrorPage() {

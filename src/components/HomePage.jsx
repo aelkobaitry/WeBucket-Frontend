@@ -1,8 +1,7 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import NavBar from "./NavBar";
 
-const Home = () => {
+const HomePage = () => {
   useEffect(() => {
     console.log("at home page");
   }, []);
@@ -17,4 +16,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
