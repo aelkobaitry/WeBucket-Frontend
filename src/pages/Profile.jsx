@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchToken, deleteToken } from "../Auth";
 
-const IncomingPage = () => {
-  const [email, setEmail] = useState({ email: "Backend fail" });
+const Profile = () => {
+  const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("fetching");
+    console.log("fetching profile data");
     fetch("http://localhost:8000/api/v1/auth/current_user", {
       method: "GET",
       headers: {
@@ -22,7 +22,7 @@ const IncomingPage = () => {
         }
         return response.json();
       })
-      .then((data) => setEmail(data))
+      .then((data) => setUserData(data))
       .catch((error) => {
         if (error.message.startsWith("403")) {
           deleteToken();
@@ -41,17 +41,32 @@ const IncomingPage = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <img src={logo} className="w-[8%]" alt="logo" />
-      <div className="text-[#A778AF] font-bold text-3xl pt-4">
-        User email from backend: {email.email}
-      </div>
+      {userData === null ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <div className="text-[#A778AF] font-bold text-3xl pt-4">
+            Username: {userData.username}
+          </div>
+          <div className="text-[#A778AF] font-bold text-3xl pt-4">
+            Email: {userData.email}
+          </div>
+          <div className="text-[#A778AF] font-bold text-3xl pt-4">
+            ID: {userData.id}
+          </div>
+          <div className="text-[#A778AF] font-bold text-3xl pt-4">
+            Account created: {userData.created_at.toString()}
+          </div>
+        </>
+      )}
       <button
-        className="w-full p-2 mt-4 text-neutral-300 bg-purple-950"
+        className="w-24 p-2 mt-4 text-neutral-300 bg-purple-950"
         onClick={signOut}
       >
-        signout
+        Sign out
       </button>
     </div>
   );
 };
 
-export default IncomingPage;
+export default Profile;

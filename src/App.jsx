@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
 import Stars from "./components/Stars";
-import IncomingPage from "./components/IncomingPage";
+import IncomingPage from "./components/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import { RequireToken } from "./Auth";
 import Login from "./components/Login";
+import Profile from "./pages/Profile";
+import Home from "./components/Home";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +19,7 @@ const router = createBrowserRouter([
     path: "home",
     element: (
       <RequireToken>
-        <IncomingPage />
+        <Home />
         <Stars />
       </RequireToken>
     ),
@@ -29,6 +31,18 @@ const router = createBrowserRouter([
       <>
         <Login />
         <Stars />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "profile",
+    element: (
+      <>
+        <RequireToken>
+          <Profile />
+          <Stars />
+        </RequireToken>
       </>
     ),
     errorElement: <ErrorPage />,
