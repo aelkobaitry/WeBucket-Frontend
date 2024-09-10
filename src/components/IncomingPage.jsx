@@ -16,9 +16,21 @@ const IncomingPage = () => {
         Authorization: "Bearer " + fetchToken(),
       },
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+      })
       .then((data) => setEmail(data))
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        if (error.message.startsWith("403")) {
+          deleteToken();
+          navigate("/login");
+        } else {
+          console.log("Error code: ", error.message);
+        }
+      });
   }, []);
 
   const signOut = () => {
