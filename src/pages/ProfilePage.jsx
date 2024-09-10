@@ -1,7 +1,7 @@
-import logo from "../assets/Logo.svg";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchToken, deleteToken } from "../Auth";
+import NavBar from "../components/NavBar";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -39,33 +39,35 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <img src={logo} className="w-[8%]" alt="logo" />
-      {userData === null ? (
-        <div>Loading...</div>
-      ) : (
-        <>
-          <div className="text-[#A778AF] font-bold text-3xl pt-4">
-            Username: {userData.username}
-          </div>
-          <div className="text-[#A778AF] font-bold text-3xl pt-4">
-            Email: {userData.email}
-          </div>
-          <div className="text-[#A778AF] font-bold text-3xl pt-4">
-            ID: {userData.id}
-          </div>
-          <div className="text-[#A778AF] font-bold text-3xl pt-4">
-            Account created: {userData.created_at.toString()}
-          </div>
-        </>
-      )}
-      <button
-        className="w-24 p-2 mt-4 text-neutral-300 bg-purple-950"
-        onClick={signOut}
-      >
-        Sign out
-      </button>
-    </div>
+    <>
+      <NavBar />
+      <div className="flex flex-col items-center justify-center">
+        {userData === null ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <div className="text-[#A778AF] font-bold text-3xl pt-4">
+              Username: {userData.username}
+            </div>
+            <div className="text-[#A778AF] font-bold text-3xl pt-4">
+              Email: {userData.email}
+            </div>
+            <div className="text-[#A778AF] font-bold text-3xl pt-4">
+              ID: {userData.id}
+            </div>
+            <div className="text-[#A778AF] font-bold text-3xl pt-4">
+              Account created: {userData.created_at.toString()}
+            </div>
+          </>
+        )}
+        <button
+          className="w-24 p-2 mt-4 text-neutral-300 bg-purple-950"
+          onClick={signOut}
+        >
+          Sign out
+        </button>
+      </div>
+    </>
   );
 };
 
