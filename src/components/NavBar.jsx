@@ -1,6 +1,6 @@
 import logo from "../assets/Logo.svg";
 import profilePic from "../assets/base-pfp.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 /**
  * Represents a Navigation Bar. There are two elements in this nav bar, which are the hamburger menu and profile picture.
@@ -20,9 +20,9 @@ export default function NavBar() {
 
   return (
     <nav className="fixed top-0 flex justify-between w-full start-0">
-      <a href="https://we-bucket.com/" className="flex items-center">
+      <Link to="/" className="flex items-center">
         <img src={logo} className="w-14 mt-11 ml-11" alt="WeBucket Logo" />
-      </a>
+      </Link>
       <img
         src={profilePic}
         alt="profile-picture"
