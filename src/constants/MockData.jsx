@@ -18,5 +18,5 @@ export const items = [
     {
         title: 'Fifth Item',
         description: 'This is the description for the fifth item.'
-    }
+    },
 ];

@@ -25,7 +25,8 @@ const Stars = () => {
     },
     fullScreen: {
       enable: true,
-      zIndex: -1,
+      //changed to zero to account for mantine provider interference (using mantine for the static carousel)
+      zIndex: 0,
     },
   };
   return <Particles id="tsparticles" init={particlesInit} options={options} />;
