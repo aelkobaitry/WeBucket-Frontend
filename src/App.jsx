@@ -6,7 +6,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { RequireToken } from "./Auth";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
-import HomePage from "./components/HomePage";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
