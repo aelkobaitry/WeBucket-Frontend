@@ -41,7 +41,7 @@ const ProfilePage = () => {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center justify-center">
+      <div className="relative z-10 flex flex-col items-center justify-center">
         {userData === null ? (
           <div>Loading...</div>
         ) : (

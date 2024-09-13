@@ -7,11 +7,17 @@ import { RequireToken } from "./Auth";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
+import RootPage from "./pages/RootPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Stars />,
+    element: (
+      <>
+        <RootPage />
+        <Stars />
+      </>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -37,12 +43,10 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: (
-      <>
-        <RequireToken>
-          <ProfilePage />
-          <Stars />
-        </RequireToken>
-      </>
+      <RequireToken>
+        <ProfilePage />
+        <Stars />
+      </RequireToken>
     ),
     errorElement: <ErrorPage />,
   },

@@ -9,7 +9,7 @@ function ErrorPage() {
   return (
     <>
       <NavBar />
-      <div className="fixed inset-x-0 flex flex-col items-center justify-center">
+      <div className="fixed inset-x-0 z-10 flex flex-col items-center justify-center">
         <div className="text-[#A778AF] font-bold text-3xl">
           A bad 404 not found page (great job developer :/)
         </div>

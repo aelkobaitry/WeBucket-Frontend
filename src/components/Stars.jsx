@@ -2,7 +2,7 @@ import Particles from "react-tsparticles";
 import React, { useCallback } from "react";
 import { loadStarsPreset } from "tsparticles-preset-stars";
 
-const Stars = () => {
+const Stars = ({ zIndexVal }) => {
   const particlesInit = useCallback(async (engine) => {
     await loadStarsPreset(engine);
   }, []);
@@ -25,11 +25,13 @@ const Stars = () => {
     },
     fullScreen: {
       enable: true,
-      //changed to zero to account for mantine provider interference (using mantine for the static carousel)
-      zIndex: 0,
     },
   };
-  return <Particles id="tsparticles" init={particlesInit} options={options} />;
+  return (
+    <div className="-z-50">
+      <Particles id="tsparticles" init={particlesInit} options={options} />
+    </div>
+  );
 };
 
 export default Stars;
