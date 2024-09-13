@@ -11,7 +11,7 @@ import SettingsModal from "./BucketSettingsModal";
 const BucketListCard = React.memo(function (props) {
   const { data, dataIndex } = props;
   const { title, description } = data[dataIndex];
-  
+
   const [cardTitle, setCardTitle] = useState(title);
   const [cardDescription, setCardDescription] = useState(description);
 
@@ -28,8 +28,10 @@ const BucketListCard = React.memo(function (props) {
     if (titleRef.current) {
       if (titleModal) {
         setCardTitle(titleRef.current.textContent);
+        //TODO: set the title in the backend
       } else if (descModal) {
         setCardDescription(titleRef.current.textContent);
+        //TODO: set the description in the backend
       }
     }
     setTitleModal(false);
@@ -38,6 +40,7 @@ const BucketListCard = React.memo(function (props) {
 
   const handleBookmarkClick = () => {
     setBookmarked(!bookmarked);
+    //TODO: add to the bookmarked list in the backend
   };
 
   const titleRef = useRef(null);
@@ -82,7 +85,10 @@ const BucketListCard = React.memo(function (props) {
               },
             }}
           >
-            <SettingsModal setTitleModal={setTitleModal} setDescModal={setDescModal} />
+            <SettingsModal
+              setTitleModal={setTitleModal}
+              setDescModal={setDescModal}
+            />
           </Popover>
         </div>
         <div class="flex-grow flex justify-center items-center w-full">
@@ -93,7 +99,12 @@ const BucketListCard = React.memo(function (props) {
               class="w-14 h-14 mx-1"
               draggable={false}
             />
-            <img src={dice} alt="dice icon" class="w-14 h-14 mx-1" draggable={false} />
+            <img
+              src={dice}
+              alt="dice icon"
+              class="w-14 h-14 mx-1"
+              draggable={false}
+            />
             <img
               src={pizza}
               alt="pizza icon"
@@ -111,7 +122,8 @@ const BucketListCard = React.memo(function (props) {
           </p>
         </div>
         <div class="flex justify-center">
-          <button class="bg-midnight text-mainPurple text-sm py-2 px-6 mt-1 rounded-full custom-shadow active:scale-95 active:bg-midnight transition-transform duration-100">
+          <button class="bg-midnight text-mainPurple text-sm py-2 px-6 mt-1 rounded-full custom-shadow active:scale-95 active:bg-midnight transition-transform duration-100"
+          >
             View List
           </button>
         </div>
