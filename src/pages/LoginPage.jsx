@@ -38,12 +38,12 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="relative z-10 flex flex-col items-center justify-center">
       {fetchToken() ? (
         <Navigate to={"/home"} />
       ) : (
         <form
-          className="text-[#A778AF] font-light text-xl"
+          className="text-[#A778AF] font-light text-xl relative"
           onSubmit={handleSubmit}
         >
           Login ({username} - {password})

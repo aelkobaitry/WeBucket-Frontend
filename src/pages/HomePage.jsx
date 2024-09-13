@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import BucketListCarousel from "../components/BucketListCarousel";
 import NavBar from "../components/NavBar";
 
 const HomePage = () => {
@@ -9,9 +10,7 @@ const HomePage = () => {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center justify-center text-[#A778AF] font-bold text-3xl pt-4">
-        WeBucket Home Page
-      </div>
+      <BucketListCarousel />
     </>
   );
 };

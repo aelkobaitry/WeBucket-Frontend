@@ -43,12 +43,10 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: (
-      <>
-        <RequireToken>
-          <ProfilePage />
-          <Stars />
-        </RequireToken>
-      </>
+      <RequireToken>
+        <ProfilePage />
+        <Stars />
+      </RequireToken>
     ),
     errorElement: <ErrorPage />,
   },
