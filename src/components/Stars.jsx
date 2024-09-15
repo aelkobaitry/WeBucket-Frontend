@@ -2,7 +2,7 @@ import Particles from "react-tsparticles";
 import React, { useCallback } from "react";
 import { loadStarsPreset } from "tsparticles-preset-stars";
 
-const Stars = ({ zIndexVal }) => {
+const Stars = () => {
   const particlesInit = useCallback(async (engine) => {
     await loadStarsPreset(engine);
   }, []);

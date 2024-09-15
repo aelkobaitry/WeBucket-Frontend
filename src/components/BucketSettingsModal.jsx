@@ -5,20 +5,11 @@ import editDesc from "../assets/icons/editDescription.png";
 import rename from "../assets/icons/renameChecklist.png";
 import trash from "../assets/icons/trash.png";
 
-const SettingsModal = ({ setTitleModal, setDescModal }) => {
-  const handleTitle = () => {
-    setTitleModal(true);
-  };
-
-  const handleDescription = () => {
-    setDescModal(true);
-  };
-
-  const handleClose = () => {
-    setTitleModal(false);
-    setDescModal(false);
-  };
-
+const SettingsModal = ({
+  setEditTitle,
+  setEditDescription,
+  setDeleteChecklist,
+}) => {
   return (
     <div class="w-44 h-36 bg-darkerPurple rounded-[25px] shadow-custom flex items-center justify-center mx-auto">
       <ul class="font-sans text-[#340732]">
@@ -36,7 +27,7 @@ const SettingsModal = ({ setTitleModal, setDescModal }) => {
         </li>
         <li>
           <button
-            onClick={handleTitle}
+            onClick={() => setEditTitle(true)}
             class=" text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pr-0 pl-2.5"
           >
             <img src={rename} class="w-3 h-3 mr-2" />
@@ -45,7 +36,7 @@ const SettingsModal = ({ setTitleModal, setDescModal }) => {
         </li>
         <li>
           <button
-            onClick={handleDescription}
+            onClick={() => setEditDescription(true)}
             class=" text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pl-2.5"
           >
             <img src={editDesc} class="w-3 h-3 mr-2" />
@@ -53,7 +44,10 @@ const SettingsModal = ({ setTitleModal, setDescModal }) => {
           </button>
         </li>
         <li>
-          <button class=" text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pl-2.5">
+          <button
+            onClick={() => setDeleteChecklist(true)}
+            class=" text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pl-2.5"
+          >
             <img src={trash} class="w-3 h-3 mr-2" />
             Delete Checklist
           </button>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchToken, deleteToken } from "../Auth";
+import { fetchToken, deleteToken } from "../store/Auth";
 import NavBar from "../components/NavBar";
 
 const ProfilePage = () => {

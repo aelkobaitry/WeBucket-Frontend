@@ -3,7 +3,7 @@ import "./App.css";
 import Stars from "./components/Stars";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
-import { RequireToken } from "./Auth";
+import { RequireToken } from "./store/Auth";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";

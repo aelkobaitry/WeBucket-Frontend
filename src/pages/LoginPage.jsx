@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { fetchToken, setToken } from "../Auth";
+import { fetchToken, setToken } from "../store/Auth";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ function LoginPage() {
               <label className="py-2 text-sm">Password</label>
               <input
                 className="flex p-3 bg-transparent border-2 rounded-md border-purple-950"
-                type="text"
+                type="password"
                 name="password"
                 onChange={(e) => setPassword(e.target.value)}
               />
