@@ -7,6 +7,8 @@ import "@mantine/carousel/styles.css";
 import "@mantine/core/styles.css";
 import { fetchBuckets, deleteBucket } from "../store/Fetch";
 import { useNavigate } from "react-router-dom";
+import right from "../assets/icons/rightarrow.png";
+import left from "../assets/icons/leftarrow.png";
 
 const BucketListCarousel = () => {
   const [buckets, setBuckets] = useState([]);
@@ -33,7 +35,22 @@ const BucketListCarousel = () => {
             height="29rem"
             slideGap="xs"
             controlsOffset="xl"
-            controlSize={30}
+            nextControlIcon={
+              <img
+                src={right}
+                alt="right arrow"
+                className="w-10 h-10"
+                draggable={false}
+              />
+            }
+            previousControlIcon={
+              <img
+                src={left}
+                alt="left arrow"
+                className="w-10 h-10"
+                draggable={false}
+              />
+            }
           >
             {buckets.map((bucket, index) => (
               <CarouselSlide key={index}>
