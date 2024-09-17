@@ -5,28 +5,17 @@ import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import plane from "../assets/icons/plane.png";
 import dice from "../assets/icons/dice.png";
 import pizza from "../assets/icons/pizza.png";
-import { fetchToken } from "../store/Auth";
+import { createBucket } from "../store/Fetch";
+import { useNavigate } from "react-router-dom";
 
 const CreateNewCard = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
   const [newCardDescription, setNewCardDescription] = useState("");
 
   const handleModalClose = async () => {
-    const response = await fetch(
-      `http://localhost:8000/api/v1/create_checklist?title=${newCardTitle}&description=${newCardDescription}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + fetchToken(),
-        },
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-    }
+    createBucket(newCardTitle, newCardDescription, navigate);
     // TODO: navigate to the new checklist page!!
     setNewCardTitle("");
     setNewCardDescription("");

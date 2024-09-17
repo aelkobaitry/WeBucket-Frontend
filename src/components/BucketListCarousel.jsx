@@ -5,49 +5,19 @@ import CreateNewCard from "./CreateNewCard";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/carousel/styles.css";
 import "@mantine/core/styles.css";
-import { fetchToken } from "../store/Auth";
+import { fetchBuckets, deleteBucket } from "../store/Fetch";
+import { useNavigate } from "react-router-dom";
 
 const BucketListCarousel = () => {
   const [buckets, setBuckets] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/get_checklists_for_user", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/x-www-form-urlencoded",
-        Authorization: "Bearer " + fetchToken(),
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then((data) => setBuckets(data))
-      .catch((error) => {
-        if (error.message.startsWith("403")) {
-          deleteToken();
-          navigate("/login");
-        } else {
-          console.log("Error code: ", error.message);
-        }
-      });
+    fetchBuckets(setBuckets, navigate);
   }, []);
 
   const handleDeleteChecklist = async (bucketID) => {
-    const response = await fetch(
-      `http://localhost:8000/api/v1/delete_checklist/${bucketID}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: "Bearer " + fetchToken(),
-        },
-      }
-    );
-    if (response.ok) {
-      setBuckets(buckets.filter((bucket) => bucket.id !== bucketID));
-    }
+    deleteBucket(bucketID, setBuckets, navigate);
   };
 
   return (
@@ -68,7 +38,7 @@ const BucketListCarousel = () => {
             {buckets.map((bucket, index) => (
               <CarouselSlide key={index}>
                 <BucketListCard
-                  bucketContent={bucket}
+                  bucket={bucket}
                   deleteBucketFetch={handleDeleteChecklist}
                 />
               </CarouselSlide>
