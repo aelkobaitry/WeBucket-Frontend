@@ -9,12 +9,16 @@ const SettingsModal = ({
   setEditTitle,
   setEditDescription,
   setDeleteChecklist,
+  setAddUserOpen,
 }) => {
   return (
     <div class="w-44 h-36 bg-darkerPurple rounded-[25px] shadow-custom flex items-center justify-center mx-auto">
       <ul class="font-sans text-[#340732]">
         <li>
-          <button class="text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pl-2.5">
+          <button
+            onClick={() => setAddUserOpen(true)}
+            class="text-sm bg-transparent rounded-lg flex items-center w-40 h-6 hover:bg-hoverPurple pl-2.5"
+          >
             <img src={addUser} class="w-3 h-3 mr-2" />
             Add User
           </button>

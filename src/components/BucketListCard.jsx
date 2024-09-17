@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Card, IconButton, Modal, Popover } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
@@ -7,12 +7,12 @@ import dice from "../assets/icons/dice.png";
 import pizza from "../assets/icons/pizza.png";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import SettingsModal from "./BucketSettingsModal";
-import { fetchToken } from "../store/Auth";
+import { addUserToBucket, updateBucket } from "../store/Fetch";
+import { useNavigate } from "react-router-dom";
 
-const BucketListCard = React.memo(function ({
-  bucketContent,
-  deleteBucketFetch,
-}) {
+const BucketListCard = React.memo(function ({ bucket, deleteBucketFetch }) {
+  const navigate = useNavigate();
+  const [bucketContent, setBucketContent] = useState(bucket);
   const [cardTitle, setCardTitle] = useState(bucketContent.title);
   const [cardDescription, setCardDescription] = useState(
     bucketContent.description
@@ -23,7 +23,10 @@ const BucketListCard = React.memo(function ({
 
   const [editTitle, setEditTitle] = useState(false);
   const [editDescription, setEditDescription] = useState(false);
+
   const [deleteChecklist, setDeleteChecklist] = useState(false);
+  const [addUserOpen, setAddUserOpen] = useState(false);
+  const [addUsername, setAddUsername] = useState("");
 
   const handleModalChange = (e) => {
     if (editTitle) {
@@ -33,6 +36,8 @@ const BucketListCard = React.memo(function ({
     }
   };
 
+  const handleClose = () => addUserOpen(false);
+
   const handleModalClose = async () => {
     let formDetails = {};
     if (cardTitle !== bucketContent.title) {
@@ -40,24 +45,7 @@ const BucketListCard = React.memo(function ({
     } else if (cardDescription !== bucketContent.description) {
       formDetails["description"] = cardDescription;
     }
-    const response = await fetch(
-      `http://localhost:8000/api/v1/update_checklist?checklist_id=${bucketContent.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-type": "application/json",
-          Authorization: "Bearer " + fetchToken(),
-        },
-        body: JSON.stringify(formDetails),
-      }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      bucketContent = data;
-    } else {
-      console.log(response.status);
-    }
+    updateBucket(bucketContent.id, formDetails, setBucketContent, navigate);
     setEditTitle(false);
     setEditDescription(false);
     setAnchorEl(false);
@@ -66,6 +54,12 @@ const BucketListCard = React.memo(function ({
   const handleDeleteChecklist = async () => {
     setDeleteChecklist(false);
     deleteBucketFetch(bucketContent.id);
+  };
+
+  const handleAddUser = async () => {
+    addUserToBucket(bucketContent.id, addUsername, navigate);
+    setAddUserOpen(false);
+    setAddUsername("");
   };
 
   const handleBookmarkClick = () => {
@@ -110,6 +104,7 @@ const BucketListCard = React.memo(function ({
               setEditTitle={setEditTitle}
               setEditDescription={setEditDescription}
               setDeleteChecklist={setDeleteChecklist}
+              setAddUserOpen={setAddUserOpen}
             />
           </Popover>
         </div>
@@ -200,6 +195,34 @@ const BucketListCard = React.memo(function ({
             >
               YES
             </button>
+          </div>
+        </div>
+      </Modal>
+      <Modal
+        open={Boolean(addUserOpen)}
+        onClose={handleClose}
+        BackdropProps={{
+          sx: {
+            backdropFilter: "blur(10px)",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
+        }}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <div className="w-full max-w-md p-4 bg-mainPurple rounded-xl">
+            <input
+              placeholder="Enter username"
+              className="w-full bg-midnight text-mainPurple"
+              onChange={(e) => setAddUsername(e.target.value)}
+            />
+            <div className="flex justify-center mt-4">
+              <button
+                onClick={handleAddUser}
+                className="px-6 py-2 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight"
+              >
+                Add User
+              </button>
+            </div>
           </div>
         </div>
       </Modal>
