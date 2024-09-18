@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, IconButton, Modal, Popover } from "@mui/material";
+import { Avatar, Card, IconButton, Modal, Popover } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import plane from "../assets/icons/plane.png";
@@ -9,6 +9,8 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import SettingsModal from "./BucketSettingsModal";
 import { addUserToBucket, updateBucket } from "../store/Fetch";
 import { useNavigate } from "react-router-dom";
+import avatar1 from "../assets/avatar-test-2.png"
+import avatar2 from "../assets/avatar-test-1.png"
 
 const BucketListCard = React.memo(function ({ bucket, deleteBucketFetch }) {
   const navigate = useNavigate();
@@ -79,12 +81,16 @@ const BucketListCard = React.memo(function ({ bucket, deleteBucketFetch }) {
           >
             {bookmarked ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
           </IconButton>
+                    <div class="flex flex-row">
+          <Avatar sx={{ width: 32, height: 32 }} src={avatar2}/>
+          <Avatar sx={{ position: 'absolute', top: 8.5, right: 100, width: 32, height: 32 }} src={avatar1}/>
           <IconButton
             size="small"
             onClick={(event) => setAnchorEl(event.currentTarget)}
           >
             <MoreVertIcon />
           </IconButton>
+          </div>
           <Popover
             open={Boolean(anchorEl)}
             anchorEl={anchorEl}
@@ -154,16 +160,16 @@ const BucketListCard = React.memo(function ({ bucket, deleteBucketFetch }) {
         }}
       >
         <div className="flex items-center justify-center w-full h-full">
-          <div className="w-full max-w-md p-4 bg-mainPurple rounded-xl">
+          <div className="w-full max-w-md p-4 border-mainPurple border-solid border-2 bg-midnight rounded-xl">
             <input
               value={editTitle ? cardTitle : cardDescription}
-              className="w-full bg-midnight text-mainPurple"
+              class="w-full bg-transparent text-mainPurple outline-none shadow-transparent"
               onChange={handleModalChange}
             />
             <div className="flex justify-center mt-4">
               <button
                 onClick={handleModalClose}
-                className="px-6 py-2 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight"
+                className="px-6 py-2 text-sm transition-transform duration-100 rounded-full border-mainPurple bg-midnight text-mainPurple custom-shadow active:scale-95"
               >
                 Done
               </button>
@@ -181,20 +187,22 @@ const BucketListCard = React.memo(function ({ bucket, deleteBucketFetch }) {
         }}
       >
         <div className="flex items-center justify-center w-full h-full">
-          <div className="flex flex-row justify-center w-full max-w-md p-4 bg-mainPurple rounded-xl">
+          <div className="flex flex-col text-center justify-center w-full max-w-md p-4 border-solid border-mainPurple border-2 bg-midnight rounded-xl text-mainPurple">
             Are you sure you want to delete this bucket?
+            <div class="flex-row">
             <button
               onClick={() => setDeleteChecklist(false)}
-              className="m-2 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight"
+              className="mt-4 mr-4 px-6 py-2 text-sm transition-transform duration-100 rounded-full border-mainPurple bg-midnight text-mainPurple custom-shadow active:scale-95"
             >
               NO
             </button>
             <button
               onClick={handleDeleteChecklist}
-              className="m-2 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight"
+              className="px-6 py-2 text-sm transition-transform duration-100 rounded-full border-mainPurple bg-midnight text-mainPurple custom-shadow active:scale-95"
             >
               YES
             </button>
+            </div>
           </div>
         </div>
       </Modal>
