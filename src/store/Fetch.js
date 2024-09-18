@@ -36,11 +36,13 @@ export async function fetchBuckets(setBuckets, navigate) {
  *
  * @param {string} newBucketTitle - The title of the new bucket.
  * @param {string} newBucketDescription - The description of the new bucket.
+ * @param {Function} setBuckets - Function to set the buckets state.
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function createBucket(
   newBucketTitle,
   newBucketDescription,
+  setBuckets,
   navigate
 ) {
   return fetch(
@@ -57,7 +59,9 @@ export async function createBucket(
       if (!response.ok) {
         throw new Error(`${response.status}: ${response.statusText}`);
       }
+      return response.json();
     })
+    .then((data) => setBuckets(data))
     .catch((error) => {
       if (error.message.startsWith("403")) {
         deleteToken();

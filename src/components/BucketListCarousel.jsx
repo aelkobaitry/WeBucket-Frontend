@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import BucketListCard from "./BucketListCard";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import CreateNewCard from "./CreateNewCard";
@@ -16,7 +16,7 @@ const BucketListCarousel = () => {
 
   useEffect(() => {
     fetchBuckets(setBuckets, navigate);
-  }, []);
+  }, [navigate]);
 
   const handleDeleteChecklist = async (bucketID) => {
     deleteBucket(bucketID, setBuckets, navigate);
@@ -61,7 +61,7 @@ const BucketListCarousel = () => {
               </CarouselSlide>
             ))}
             <CarouselSlide>
-              <CreateNewCard />
+              <CreateNewCard setBuckets={setBuckets}/>
             </CarouselSlide>
           </Carousel>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Card, IconButton, Modal } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
@@ -7,15 +7,16 @@ import dice from "../assets/icons/dice.png";
 import pizza from "../assets/icons/pizza.png";
 import { createBucket } from "../store/Fetch";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const CreateNewCard = () => {
+const CreateNewCard = ({ setBuckets }) => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState("");
   const [newCardDescription, setNewCardDescription] = useState("");
 
   const handleModalClose = async () => {
-    await createBucket(newCardTitle, newCardDescription, navigate);
+    await createBucket(newCardTitle, newCardDescription, setBuckets, navigate);
     // TODO: navigate to the new checklist page!!
     setNewCardTitle("");
     setNewCardDescription("");
@@ -82,15 +83,15 @@ const CreateNewCard = () => {
         }}
       >
         <div className="flex items-center justify-center w-full h-full">
-          <div className="w-full max-w-md p-4 border-mainPurple border-solid border-2 bg-midnight rounded-xl">
+          <div className="w-full max-w-md p-4 border-2 border-solid border-mainPurple bg-midnight rounded-xl">
             <input
               placeholder="Bucket name"
-              class="w-full bg-transparent text-mainPurple outline-none shadow-transparent"
+              className="w-full bg-transparent outline-none text-mainPurple shadow-transparent"
               onChange={(e) => setNewCardTitle(e.target.value)}
             />
             <input
               placeholder="Bucket description"
-              class="w-full bg-transparent text-mainPurple outline-none shadow-transparent"
+              className="w-full bg-transparent outline-none text-mainPurple shadow-transparent"
               onChange={(e) => setNewCardDescription(e.target.value)}
             />
             <div className="flex justify-center mt-4">
@@ -106,6 +107,10 @@ const CreateNewCard = () => {
       </Modal>
     </div>
   );
+};
+
+CreateNewCard.propTypes = {
+  setBuckets: PropTypes.func.isRequired,
 };
 
 export default CreateNewCard;
