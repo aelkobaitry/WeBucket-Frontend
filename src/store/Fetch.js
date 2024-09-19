@@ -1,4 +1,6 @@
-import { fetchToken, deleteToken } from "./Auth";
+import { fetchToken, deleteToken, setToken } from "./Auth";
+import MinorToast from "../components/modals/MinorToast";
+import toast from "react-hot-toast";
 
 /**
  * Fetches buckets for the user.
@@ -15,18 +17,27 @@ export async function fetchBuckets(setBuckets, navigate) {
     },
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+      if (response.status === 403) {
+        throw new Error("Must Login Again");
       }
       return response.json();
     })
-    .then((data) => setBuckets(data))
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        setBuckets(data);
+      }
+    })
     .catch((error) => {
-      if (error.message.startsWith("403")) {
+      if (error.message.startsWith("Must Login Again")) {
+        MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
+      } else if (error.message) {
+        MinorToast("Error!", error.message);
       } else {
-        console.log("Error code: ", error.message);
+        console.log(error);
       }
     });
 }
@@ -36,11 +47,13 @@ export async function fetchBuckets(setBuckets, navigate) {
  *
  * @param {string} newBucketTitle - The title of the new bucket.
  * @param {string} newBucketDescription - The description of the new bucket.
+ * @param {Function} setBuckets - Function to set the buckets state.
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function createBucket(
   newBucketTitle,
   newBucketDescription,
+  setBuckets,
   navigate
 ) {
   return fetch(
@@ -54,16 +67,28 @@ export async function createBucket(
     }
   )
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+      if (response.status === 403) {
+        throw new Error("Must Login Again");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        setBuckets(data);
+        MinorToast("Success!", "Bucket created successfully.");
       }
     })
     .catch((error) => {
-      if (error.message.startsWith("403")) {
+      if (error.message.startsWith("Must Login Again")) {
+        MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
+      } else if (error.message) {
+        MinorToast("Error!", error.message);
       } else {
-        console.log("Error code: ", error.message);
+        console.log(error);
       }
     });
 }
@@ -83,18 +108,28 @@ export async function deleteBucket(bucketID, setBuckets, navigate) {
     },
   })
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+      if (response.status === 403) {
+        throw new Error("Must Login Again");
       }
       return response.json();
     })
-    .then((data) => setBuckets(data))
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        setBuckets(data);
+        MinorToast("Success!", "Bucket removed successfully.");
+      }
+    })
     .catch((error) => {
-      if (error.message.startsWith("403")) {
+      if (error.message.startsWith("Must Login Again")) {
+        MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
+      } else if (error.message) {
+        MinorToast("Error!", error.message);
       } else {
-        console.log("Error code: ", error.message);
+        console.log(error);
       }
     });
 }
@@ -118,16 +153,27 @@ export async function addUserToBucket(bucketID, username, navigate) {
     }
   )
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+      if (response.status === 403) {
+        throw new Error("Must Login Again");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        MinorToast("Success!", "User added to bucket successfully.");
       }
     })
     .catch((error) => {
-      if (error.message.startsWith("403")) {
+      if (error.message.startsWith("Must Login Again")) {
+        MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
+      } else if (error.message) {
+        MinorToast("Error!", error.message);
       } else {
-        console.log("Error code: ", error.message);
+        console.log(error);
       }
     });
 }
@@ -158,18 +204,60 @@ export async function updateBucket(
     }
   )
     .then((response) => {
-      if (!response.ok) {
-        throw new Error(`${response.status}: ${response.statusText}`);
+      if (response.status === 403) {
+        throw new Error("Must Login Again");
       }
       return response.json();
     })
-    .then((data) => setBucketContent(data))
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      } else {
+        setBucketContent(data);
+        MinorToast("Success!", "Bucket detail updated successfully.");
+      }
+    })
     .catch((error) => {
-      if (error.message.startsWith("403")) {
+      if (error.message.startsWith("Must Login Again")) {
+        MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
+      } else if (error.message) {
+        MinorToast("Error!", error.message);
       } else {
-        console.log("Error code: ", error.message);
+        console.log(error);
+      }
+    });
+}
+
+/**
+ * Logs in a user
+ *
+ * @param {Object} formDetails - The login form details.
+ */
+export async function loginUser(formDetails, navigate) {
+  return fetch("http://localhost:8000/token", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+    },
+    body: formDetails,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      }
+      setToken(data.access_token);
+      toast.remove();
+      navigate("/home");
+    })
+    .catch((error) => {
+      if (error.message) {
+        MinorToast("Error!", error.message);
+      } else {
+        MinorToast("Error!", "error");
+        console.log(error);
       }
     });
 }

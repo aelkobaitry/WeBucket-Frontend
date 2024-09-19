@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import BucketListCard from "./BucketListCard";
 import { Carousel, CarouselSlide } from "@mantine/carousel";
 import CreateNewCard from "./CreateNewCard";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/carousel/styles.css";
 import "@mantine/core/styles.css";
-import { fetchBuckets, deleteBucket } from "../store/Fetch";
+import { fetchBuckets } from "../store/Fetch";
 import { useNavigate } from "react-router-dom";
 import right from "../assets/icons/rightarrow.png";
 import left from "../assets/icons/leftarrow.png";
@@ -16,11 +16,7 @@ const BucketListCarousel = () => {
 
   useEffect(() => {
     fetchBuckets(setBuckets, navigate);
-  }, []);
-
-  const handleDeleteChecklist = async (bucketID) => {
-    deleteBucket(bucketID, setBuckets, navigate);
-  };
+  }, [navigate]);
 
   return (
     <MantineProvider>
@@ -56,12 +52,12 @@ const BucketListCarousel = () => {
               <CarouselSlide key={index}>
                 <BucketListCard
                   bucket={bucket}
-                  deleteBucketFetch={handleDeleteChecklist}
+                  setBuckets={setBuckets}
                 />
               </CarouselSlide>
             ))}
             <CarouselSlide>
-              <CreateNewCard />
+              <CreateNewCard setBuckets={setBuckets}/>
             </CarouselSlide>
           </Carousel>
         </div>
