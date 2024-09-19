@@ -18,13 +18,8 @@ import EditTextModal from "./modals/EditTextModal";
 
 function BucketListCard({ bucket, setBuckets }) {
   const navigate = useNavigate();
-  const [bucketContent, setBucketContent] = useState(bucket);
-  const [cardTitle, setCardTitle] = useState(bucketContent.title);
-  const [cardDescription, setCardDescription] = useState(
-    bucketContent.description
-  );
-
-  const [bookmarked, setBookmarked] = useState(false);
+  const [cardTitle, setCardTitle] = useState(bucket.title);
+  const [cardDescription, setCardDescription] = useState(bucket.description);
   const [anchorEl, setAnchorEl] = useState(false);
 
   const [editTitle, setEditTitle] = useState(false);
@@ -34,20 +29,30 @@ function BucketListCard({ bucket, setBuckets }) {
   const [addUserModalOpen, setAddUserModalOpen] = useState(false);
 
   const handleCloseModal = async () => {
+    if (!cardTitle) {
+      return;
+    }
     let formDetails = {};
-    if (cardTitle !== bucketContent.title) {
+    if (cardTitle !== bucket.title) {
       formDetails["title"] = cardTitle;
-    } else if (cardDescription !== bucketContent.description) {
+    } else if (cardDescription !== bucket.description) {
       formDetails["description"] = cardDescription;
     }
-    updateBucket(bucketContent.id, formDetails, setBucketContent, navigate);
+    if (Object.keys(formDetails).length > 0) {
+      await updateBucket(bucket.id, formDetails, setBuckets, navigate);
+    }
     setEditTitle(false);
     setEditDescription(false);
     setAnchorEl(false);
   };
 
   const handleBookmarkClick = () => {
-    setBookmarked(!bookmarked);
+    updateBucket(
+      bucket.id,
+      { bookmark: !bucket.bookmark },
+      setBuckets,
+      navigate
+    );
   };
 
   return (
@@ -60,7 +65,7 @@ function BucketListCard({ bucket, setBuckets }) {
             size="small"
             onClick={handleBookmarkClick}
           >
-            {bookmarked ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
+            {bucket.bookmark ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
           </IconButton>
           <div className="flex flex-row">
             <Avatar sx={{ width: 32, height: 32 }} src={avatar2} />
@@ -150,13 +155,13 @@ function BucketListCard({ bucket, setBuckets }) {
         open={showDeleteBucketModal}
         setOpen={setShowDeleteBucketModal}
         setAnchorEl={setAnchorEl}
-        bucketID={bucketContent.id}
+        bucketID={bucket.id}
         setBuckets={setBuckets}
       />
       <AddUserModal
         open={addUserModalOpen}
         setOpen={setAddUserModalOpen}
-        bucketID={bucketContent.id}
+        bucketID={bucket.id}
       />
     </div>
   );
