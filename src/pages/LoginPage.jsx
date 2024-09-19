@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { fetchToken, setToken } from "../store/Auth";
+import { fetchToken } from "../store/Auth";
+import { loginUser } from "../store/Fetch";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -19,21 +20,7 @@ function LoginPage() {
       const formDetails = new URLSearchParams();
       formDetails.append("username", username);
       formDetails.append("password", password);
-      console.log("sending");
-      const response = await fetch("http://localhost:8000/token", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/x-www-form-urlencoded",
-        },
-        body: formDetails,
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setToken(data.access_token);
-        navigate("/home");
-      } else {
-        console.log("error");
-      }
+      loginUser(formDetails, navigate);
     }
   };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import Stars from "./components/Stars";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -8,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import RootPage from "./pages/RootPage";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +26,7 @@ const router = createBrowserRouter([
       <RequireToken>
         <HomePage />
         <Stars />
+        <Toaster />
       </RequireToken>
     ),
     errorElement: <ErrorPage />,
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       <>
         <LoginPage />
         <Stars />
+        <Toaster />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -46,6 +48,7 @@ const router = createBrowserRouter([
       <RequireToken>
         <ProfilePage />
         <Stars />
+        <Toaster />
       </RequireToken>
     ),
     errorElement: <ErrorPage />,
