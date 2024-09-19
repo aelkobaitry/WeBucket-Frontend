@@ -6,7 +6,7 @@ const MinorToast = (title, message) => {
     (t) => (
       <div
         className={` w-full max-w-sm overflow-hidden bg-midnight opacity-90 border-solid border-mainPurple border-[1px] rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5 ${
-          t.visible ? "animate-enter" : "animate-leave"
+          t.visible ? "animate-slideInRight" : "animate-leave"
         }`}
       >
         <div className="pt-2 pb-2 pl-4 pr-4">

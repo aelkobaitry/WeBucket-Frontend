@@ -3,23 +3,32 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      "dropShadow": {
-        "card": "0px 2px 8px #000421",
+      dropShadow: {
+        card: "0px 2px 8px #000421",
         "card-title": "-4px 4px 10px rgba(0, 0, 0, 0.25)",
-        "btn": "0px 4px 4px rgba(0, 0, 0, 0.25)"
+        btn: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       },
-      "spacing": {
-        "card": "-6.7rem"
+      spacing: {
+        card: "-6.7rem",
       },
-      "boxShadow": {
-        "input": "inset 0 0 3px #000421"
+      boxShadow: {
+        input: "inset 0 0 3px #000421",
       },
-      "fontFamily": {
-        "title": ["righteous", "sans-serif"]
+      fontFamily: {
+        title: ["righteous", "sans-serif"],
       },
-      "borderWidth": {
-        "3": "3px"
-      }
+      borderWidth: {
+        3: "3px",
+      },
+      keyframes: {
+        slideInRight: {
+          "0%": { transform: "translateX(100%)", opacity: "0.5" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
+      },
+      animation: {
+        slideInRight: "slideInRight 0.25s ease-out forwards",
+      },
     },
     colors: {
       "light-purple": "#D48AE0",
@@ -39,7 +48,7 @@ export default {
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
-        righteous: ["Righteous"]
+      righteous: ["Righteous"],
     },
     keyframes: {
       fall: {
