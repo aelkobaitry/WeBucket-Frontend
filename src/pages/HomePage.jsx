@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import BucketListCarousel from "../components/BucketListCarousel";
 import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const HomePage = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const HomePage = () => {
     <>
       <NavBar />
       <BucketListCarousel />
+      <Footer />
     </>
   );
 };

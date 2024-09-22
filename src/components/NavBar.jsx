@@ -1,6 +1,6 @@
 import logo from "../assets/Logo.svg";
 import profilePic from "../assets/base-pfp.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 /**
  * Represents a Navigation Bar. There are two elements in this nav bar, which are the hamburger menu and profile picture.
