@@ -236,6 +236,39 @@ export async function updateBucket(
 }
 
 /**
+ * Attempts to create a new user
+ *
+ * @param {Object} formDetails - The login form details.
+ */
+export async function createUser(formDetails, navigate) {
+  return fetch(
+    `http://localhost:8000/api/v1/add_user?username=${formDetails.username}&firstname=${formDetails.firstname}&lastname=${formDetails.lastname}&email=${formDetails.email}&password=${formDetails.password}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      }
+      toast.remove();
+      navigate("/login");
+    })
+    .catch((error) => {
+      if (error.message) {
+        MinorToast("Error!", error.message);
+      } else {
+        MinorToast("Error!", "error");
+        console.log(error);
+      }
+    });
+}
+
+/**
  * Logs in a user
  *
  * @param {Object} formDetails - The login form details.

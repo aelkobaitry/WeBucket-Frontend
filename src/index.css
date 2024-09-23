@@ -30,6 +30,10 @@ input::file-selector-button {
     border-radius: 6px;
 }
 
+input:focus {
+  outline: none;
+}
+
 :root {
   font-family: "Righteous";
   line-height: 1.5;

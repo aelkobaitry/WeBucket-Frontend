@@ -42,6 +42,7 @@ export default {
       transparent: "transparent",
       white: "white",
       black: "black",
+      lightGray: "#D3D3D3",
     },
     boxShadow: {
       custom: "-2px 5px 10px rgba(0, 0, 0, 0.25)",

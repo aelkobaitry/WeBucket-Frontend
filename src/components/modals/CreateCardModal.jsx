@@ -43,6 +43,7 @@ const CreateCardModal = ({ open, setOpen, setBuckets }) => {
             <button
               onClick={handleModalClose}
               className="px-6 py-2 text-sm transition-transform duration-100 rounded-full border-mainPurple bg-midnight text-mainPurple custom-shadow active:scale-95"
+              disabled={!newCardTitle}
             >
               Done
             </button>
