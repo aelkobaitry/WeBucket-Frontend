@@ -20,6 +20,7 @@
     "@mui/icons-material": "^5.16.5",
     "@mui/material": "^5.16.5",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
+    "@mui/x-data-grid": "^7.18.0",
     "embla-carousel-react": "^7.1.0",
     "prettier": "^3.3.3",
     "prop-types": "^15.8.1",
