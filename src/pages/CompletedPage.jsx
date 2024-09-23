@@ -56,6 +56,7 @@ export default function CompletedPage() {
       field: "type",
       headerName: "Type",
       width: 40,
+      headerClassName: "bg-dark-purple text-white",
       resizable: false,
       renderCell: ({ value }) => {
         let source = "";
@@ -82,8 +83,9 @@ export default function CompletedPage() {
       field: "item",
       headerName: "Item",
       width: 200,
+      headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
-        <div className="text-light-purple flex items-center min-h-20 pr-2 overflow-hidden line-clamp-4">
+        <div className="flex items-center min-h-20 pr-2 overflow-hidden line-clamp-4">
           <p className="text-light-purple text-sm">{value}</p>
         </div>
       ),
@@ -91,9 +93,10 @@ export default function CompletedPage() {
     {
       field: "description",
       headerName: "Description",
-      minWidth: 400,
+      minWidth: 300,
+      headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
-        <div className="text-light-purple flex items-center min-h-20">
+        <div className="flex items-center min-h-20">
           <p className="text-light-purple text-sm overflow-hidden overflow-ellipsis line-clamp-3">
             {value}
           </p>
@@ -104,6 +107,7 @@ export default function CompletedPage() {
       field: "ratings",
       headerName: "Rating",
       width: 100,
+      headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
         <div className="text-light-purple flex flex-wrap items-center min-h-20 overflow-scroll">
           <div className="w-full flex items-center space-x-2">
@@ -128,7 +132,9 @@ export default function CompletedPage() {
     {
       field: "thoughts",
       headerName: "Thoughts",
+      flex: 1,
       width: "400",
+      headerClassName: "bg-dark-purple text-white",
       editable: true,
       renderCell: ({ value }) => (
         <div className="text-light-purple col-span-2 flex flex-wrap items-center min-h-20">
@@ -144,9 +150,17 @@ export default function CompletedPage() {
     {
       field: "details-btn",
       headerName: "",
-      width: "auto",
+      resizable: false,
+      filterable: false,
+      sortable: false,
+      editable: false,
+      groupable: false,
+      hideable: false,
+      flex: 0.3,
+      headerClassName: "bg-dark-purple text-white",
+      minWidth: 150,
       renderCell: () => (
-        <div className="text-light-purple flex items-center min-h-20 pr-1">
+        <div className="text-light-purple flex items-center min-h-20">
           <button
             onClick={() => {}}
             className="bg-transparent border-light-purple border-2 p-0 box-border duration-300 hover:border-4"
@@ -162,7 +176,7 @@ export default function CompletedPage() {
     <div className="min-h-screen w-screen p-8">
       <NavBar />
       <Stars />
-      <div className="header pt-20">
+      <div className="header pt-20 z-10 relative">
         <h1 className="font-title p-4">Completed</h1>
         <h4 className="pl-10 pt-3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
@@ -179,8 +193,8 @@ export default function CompletedPage() {
               className="absolute top-1/2 left-1/2 z-0 -translate-x-1/2 -translate-y-1/2"
             />
           </div>
-          <div className="text-white relative w-28 h-auto -left-8 text-center duration-300 cursor-pointer z-0">
-            <p className="tab-text absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
+          <div className="relative w-28 h-auto -left-8 text-center duration-300 cursor-pointer z-0">
+            <p className="tab-text text-white absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
               Complete
             </p>
             <img
