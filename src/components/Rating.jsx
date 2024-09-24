@@ -7,14 +7,29 @@ import PropTypes from "prop-types";
  * @param {string} type can either be "activities", "food", or "movies"
  * @param {string} profile image url of the profile picture to be displayed with the rating
  * @param {function} passRating a function that will pass the final rating back to the parent element
+ * @param {boolean} disabled true if this rating is disabled
  * @returns {JSX.Element} Rating on a scale of 1-5
  */
-export default function Rating({ type, profile, passRating }) {
+export default function Rating({
+  type,
+  profile,
+  passRating,
+  disabled,
+  height,
+  defaultRating,
+}) {
   const [rating, setRating] = useState(0);
   const finalRating = useRef(null);
 
   // Can be changed anytime
-  const numberArray = ["one", "two", "three", "four", "five"];
+  let numberArray = ["one", "two", "three", "four", "five"];
+
+  if (defaultRating) {
+    numberArray = [];
+    for (let index = 0; index < parseInt(defaultRating); index++) {
+      numberArray.push(index);
+    }
+  }
 
   let ratedImg;
   let defaultImg;
@@ -43,42 +58,66 @@ export default function Rating({ type, profile, passRating }) {
   Rating.propTypes = {
     type: PropTypes.oneOf(["activities", "food", "movies"]),
     profile: PropTypes.string.isRequired,
-    passRating: PropTypes.func.isRequired,
+    passRating: PropTypes.func,
+    disabled: PropTypes.bool,
+    height: PropTypes.number,
+    defaultValue: PropTypes.number,
   };
 
   return (
-    <div className="flex items-center center pointer-events-auto">
-      <img src={profile} alt="profile-rating" className="w-8 h-8 align-baseline border-2 border-white rounded-full" />
-      <div className="flex ml-2">
-        {numberArray.map((item, index) => {
-          return (
-            <img
-              src={rating < index + 1 ? defaultImg : ratedImg}
-              alt={`${item}-star`}
-              key={`${item}-star`}
-              className="w-10 h-10 cursor-pointer duration-300 hover:scale-110"
-              onMouseEnter={() => {
-                finalRating.current === null && setRating(index + 1);
-                console.log(finalRating.current);
-              }}
-              onMouseLeave={() => {
-                finalRating.current === null && index === 0 && setRating(0);
-              }}
-              onClick={() => {
-                if (
-                  finalRating.current === null ||
-                  finalRating.current !== index + 1
-                ) {
-                  finalRating.current = index + 1;
-                  setRating(index + 1);
-                  passRating(finalRating.current);
-                } else {
-                  finalRating.current = null;
-                }
-              }}
-            />
-          );
-        })}
+    <div
+      className={`flex items-center center ${disabled ? "pointer-events-none" : "pointer-events-auto"} ${height ? `h-${height}` : "h-10"}`}
+    >
+      <img
+        src={profile}
+        alt="profile-rating"
+        className="h-5/6 w-auto max-h-8 align-baseline border-2 border-white rounded-full"
+      />
+      <div
+        className={`flex ml-2 items-center ${height ? `h-${height}` : "h-10"}`}
+      >
+        {defaultRating ? (
+          numberArray.map(item => {
+            return (
+              <img
+                src={ratedImg}
+                alt={`${item}-star`}
+                key={`${item}-star`}
+                className="h-5/6 w-auto max-h-10"
+              />
+            )
+          })
+        ) : (
+          numberArray.map((item, index) => {
+            return (
+              <img
+                src={rating < index + 1 ? defaultImg : ratedImg}
+                alt={`${item}-star`}
+                key={`${item}-star`}
+                className="h-5/6 w-auto max-h-10 cursor-pointer duration-300 hover:scale-110"
+                onMouseEnter={() => {
+                  finalRating.current === null && setRating(index + 1);
+                  console.log(finalRating.current);
+                }}
+                onMouseLeave={() => {
+                  finalRating.current === null && index === 0 && setRating(0);
+                }}
+                onClick={() => {
+                  if (
+                    finalRating.current === null ||
+                    finalRating.current !== index + 1
+                  ) {
+                    finalRating.current = index + 1;
+                    setRating(index + 1);
+                    passRating(finalRating.current);
+                  } else {
+                    finalRating.current = null;
+                  }
+                }}
+              />
+            );
+          })
+        )}
       </div>
     </div>
   );
