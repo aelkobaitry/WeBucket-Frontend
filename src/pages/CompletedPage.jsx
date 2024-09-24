@@ -1,5 +1,4 @@
 import NavBar from "../components/NavBar.jsx";
-import Stars from "../components/Stars.jsx";
 import { DataGrid } from "@mui/x-data-grid";
 
 export default function CompletedPage() {
@@ -58,6 +57,7 @@ export default function CompletedPage() {
       width: 40,
       headerClassName: "bg-dark-purple text-white",
       resizable: false,
+      hideable: false,
       renderCell: ({ value }) => {
         let source = "";
         switch (value) {
@@ -83,6 +83,9 @@ export default function CompletedPage() {
       field: "item",
       headerName: "Item",
       width: 200,
+      sortable: false,
+      filterable: false,
+      hideable: false,
       headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
         <div className="flex items-center min-h-20 pr-2 overflow-hidden line-clamp-4">
@@ -93,6 +96,9 @@ export default function CompletedPage() {
     {
       field: "description",
       headerName: "Description",
+      sortable: false,
+      filterable: false,
+      hideable: false,
       minWidth: 300,
       headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
@@ -107,6 +113,12 @@ export default function CompletedPage() {
       field: "ratings",
       headerName: "Rating",
       width: 100,
+      resizable: false,
+      filterable: false,
+      sortable: false,
+      editable: false,
+      groupable: false,
+      hideable: false,
       headerClassName: "bg-dark-purple text-white",
       renderCell: ({ value }) => (
         <div className="text-light-purple flex flex-wrap items-center min-h-20 overflow-scroll">
@@ -132,10 +144,11 @@ export default function CompletedPage() {
     {
       field: "thoughts",
       headerName: "Thoughts",
+      editable: true,
+      hideable: false,
       flex: 1,
       width: "400",
       headerClassName: "bg-dark-purple text-white",
-      editable: true,
       renderCell: ({ value }) => (
         <div className="text-light-purple col-span-2 flex flex-wrap items-center min-h-20">
           <p className="text-light-purple text-sm pr-2 w-full whitespace-nowrap overflow-hidden overflow-ellipsis">
@@ -160,10 +173,10 @@ export default function CompletedPage() {
       headerClassName: "bg-dark-purple text-white",
       minWidth: 150,
       renderCell: () => (
-        <div className="text-light-purple flex items-center min-h-20">
+        <div className="flex items-center min-h-20">
           <button
-            onClick={() => {}}
-            className="bg-transparent border-light-purple border-2 p-0 box-border duration-300 hover:border-4"
+            onClick={() => {/* TODO: This function */}}
+            className="bg-transparent border-light-purple border-2 p-0 duration-300 hover:bg-light-purple"
           >
             <p className="text-white px-6 py-3 text-sm">Details</p>
           </button>
@@ -175,8 +188,7 @@ export default function CompletedPage() {
   return (
     <div className="min-h-screen w-screen p-8">
       <NavBar />
-      <Stars />
-      <div className="header pt-20 z-10 relative">
+      <div className="header pt-20 relative z-10">
         <h1 className="font-title p-4">Completed</h1>
         <h4 className="pl-10 pt-3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
@@ -205,7 +217,7 @@ export default function CompletedPage() {
           </div>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-8 relative z-10">
         <DataGrid
           rows={rows}
           columns={colummns}
@@ -223,8 +235,14 @@ export default function CompletedPage() {
             },
             '&.MuiDataGrid-columnHeader': {
               backgroundColor: "rgba(0, 0, 0, 0)",
+            },
+            '.MuiDataGrid-footerContainer': {
+              display: "none",
+              visibility: "hidden",
+            },
+            '.MuiSvgIcon-root': {
+              fill: "white",
             }
-
           }}
         />
       </div>

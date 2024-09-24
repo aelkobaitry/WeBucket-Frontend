@@ -57,7 +57,10 @@ const router = createBrowserRouter([
   {
     path: "completed",
     element: (
-      <CompletedPage />
+      <RequireToken>
+        <CompletedPage />
+        <Stars />
+      </RequireToken>
     ),
     errorElement: <ErrorPage />,
   },
