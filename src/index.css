@@ -15,9 +15,6 @@
     input {
         @apply p-1.5 rounded-lg text-medium-dark-purple shadow-input
     }
-    label {
-        @apply mt-4 text-dark-purple
-    }
 }
 
 * {
