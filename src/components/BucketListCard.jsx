@@ -8,8 +8,7 @@ import pizza from "../assets/icons/pizza.png";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import SettingsModal from "./BucketSettingsModal";
 import { updateBucket } from "../store/Fetch";
-import { useNavigate } from "react-router-dom";
-import avatar1 from "../assets/avatar-test-2.png";
+import { Link, useNavigate } from "react-router-dom";
 import avatar2 from "../assets/avatar-test-1.png";
 import PropTypes from "prop-types";
 import DeleteBucketModal from "./modals/DeleteBucketModal";
@@ -68,7 +67,21 @@ function BucketListCard({ bucket, setBuckets }) {
             {bucket.bookmark ? <StarRoundedIcon /> : <StarBorderRoundedIcon />}
           </IconButton>
           <div className="flex flex-row">
-            <Avatar sx={{ width: 32, height: 32 }} src={avatar2} />
+            {bucket.users.map((user, index) => (
+              <Avatar
+                key={index}
+                sx={{
+                  position: "absolute",
+                  top: 8.5,
+                  right: 85 + 20 * index,
+                  width: 32,
+                  height: 32,
+                  zIndex: 100 - index,
+                }}
+                src={avatar2}
+              />
+            ))}
+            {/* <Avatar sx={{ width: 32, height: 32 }} src={avatar2} />
             <Avatar
               sx={{
                 position: "absolute",
@@ -78,7 +91,7 @@ function BucketListCard({ bucket, setBuckets }) {
                 height: 32,
               }}
               src={avatar1}
-            />
+            /> */}
             <IconButton
               size="small"
               onClick={(event) => setAnchorEl(event.currentTarget)}
@@ -140,9 +153,11 @@ function BucketListCard({ bucket, setBuckets }) {
           </p>
         </div>
         <div className="flex justify-center">
-          <button className="px-6 py-2 mt-1 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight">
-            View List
-          </button>
+          <Link to={`/bucket/${bucket.id}`}>
+            <button className="px-6 py-2 mt-1 text-sm transition-transform duration-100 rounded-full bg-midnight text-mainPurple custom-shadow active:scale-95 active:bg-midnight">
+              View List
+            </button>
+          </Link>
         </div>
       </Card>
       <EditTextModal
