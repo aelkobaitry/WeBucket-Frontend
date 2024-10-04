@@ -283,7 +283,7 @@ export async function fetchBucketData(
   })
     .then((response) => {
       if (response.status === 403) {
-        throw new Error("Must Login Again");
+        throw new Error("403");
       }
       return response.json();
     })
@@ -298,12 +298,13 @@ export async function fetchBucketData(
       }
     })
     .catch((error) => {
-      if (error.message.startsWith("Must Login Again")) {
+      if (error.message.startsWith("403")) {
         MinorToast("Error!", error.message);
         deleteToken();
         navigate("/login");
       } else if (error.message) {
         MinorToast("Error!", error.message);
+        navigate("/home");
       } else {
         console.log(error);
       }
