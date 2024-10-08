@@ -1,36 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchToken, deleteToken } from "../store/Auth";
+import { deleteToken } from "../store/Auth";
 import NavBar from "../components/NavBar";
+import { getCurrentUser } from "../store/Fetch";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/auth/current_user", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: "Bearer " + fetchToken(),
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then((data) => setUserData(data))
-      .catch((error) => {
-        if (error.message.startsWith("403")) {
-          deleteToken();
-          navigate("/login");
-        } else {
-          console.log("Error code: ", error.message);
-        }
-      });
-  }, []);
+    getCurrentUser(setUserData, navigate);
+  }, [navigate]);
 
   const signOut = () => {
     deleteToken();

@@ -20,7 +20,7 @@ export function RequireEarlyAccessToken({ children }) {
   useEffect(() => {
     if (!auth) {
       console.log("No early access code found");
-      navigate("/early-access");
+      navigate("/");
     }
   }, []);
 

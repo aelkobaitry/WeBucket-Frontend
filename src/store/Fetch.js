@@ -9,13 +9,16 @@ import toast from "react-hot-toast";
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function fetchBuckets(setBuckets, navigate) {
-  return fetch("http://localhost:8000/api/v1/get_buckets_for_user", {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/get_buckets_for_user`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -56,17 +59,20 @@ export async function createBucket(
   setBuckets,
   navigate
 ) {
-  return fetch("http://localhost:8000/api/v1/create_bucket", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-    body: JSON.stringify({
-      title: newBucketTitle,
-      description: newBucketDescription,
-    }),
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/create_bucket`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+      body: JSON.stringify({
+        title: newBucketTitle,
+        description: newBucketDescription,
+      }),
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -102,12 +108,15 @@ export async function createBucket(
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function deleteBucket(bucketID, setBuckets, navigate) {
-  return fetch(`http://localhost:8000/api/v1/delete_bucket/${bucketID}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + fetchToken(),
-    },
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/delete_bucket/${bucketID}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + fetchToken(),
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -145,7 +154,7 @@ export async function deleteBucket(bucketID, setBuckets, navigate) {
  */
 export async function addUserToBucket(bucketID, username, navigate) {
   return fetch(
-    `http://localhost:8000/api/v1/add_user_to_bucket/${bucketID}?add_username=${username}`,
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/add_user_to_bucket/${bucketID}?add_username=${username}`,
     {
       method: "PATCH",
       headers: {
@@ -195,14 +204,17 @@ export async function updateBucket(
   navigate,
   bucketPage = false
 ) {
-  return fetch(`http://localhost:8000/api/v1/update_bucket/${bucketID}`, {
-    method: "PATCH",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-    body: JSON.stringify(updatedData),
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/update_bucket/${bucketID}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+      body: JSON.stringify(updatedData),
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -216,7 +228,7 @@ export async function updateBucket(
         if (!bucketPage) {
           setBucketContent(data);
         } else {
-          const selectedBucket = data.find(bucket => bucket.id === bucketID);
+          const selectedBucket = data.find((bucket) => bucket.id === bucketID);
           setBucketContent(selectedBucket);
         }
         MinorToast("Success!", "Bucket updated successfully.");
@@ -242,7 +254,7 @@ export async function updateBucket(
  */
 export async function verifyUniqueUser(formDetails) {
   return fetch(
-    `http://localhost:8000/api/v1/verify_unique_user?username=${formDetails.username}&email=${formDetails.email}`,
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/verify_unique_user?username=${formDetails.username}&email=${formDetails.email}`,
     {
       method: "GET",
       headers: {
@@ -255,7 +267,7 @@ export async function verifyUniqueUser(formDetails) {
       if (data.detail) {
         throw new Error(data.detail);
       }
-      return true
+      return true;
     })
     .catch((error) => {
       if (error.message) {
@@ -267,23 +279,19 @@ export async function verifyUniqueUser(formDetails) {
     });
 }
 
-
 /**
  * Attempts to create a new user
  *
  * @param {Object} formDetails - The login form details.
  */
 export async function createUser(formDetails, navigate) {
-  return fetch(
-    `http://localhost:8000/api/v1/add_user`,
-    {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(formDetails),
-    }
-  )
+  return fetch(`${import.meta.env.VITE_API_SERVICES_URL}/api/v1/add_user`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(formDetails),
+  })
     .then((response) => response.json())
     .then((data) => {
       if (data.detail) {
@@ -291,7 +299,7 @@ export async function createUser(formDetails, navigate) {
       }
       toast.remove();
       navigate("/login");
-      MinorToast("Success!", "Your account was created.")
+      MinorToast("Success!", "Your account was created.");
     })
     .catch((error) => {
       if (error.message) {
@@ -309,7 +317,7 @@ export async function createUser(formDetails, navigate) {
  * @param {Object} formDetails - The login form details.
  */
 export async function loginUser(formDetails, navigate) {
-  return fetch("http://localhost:8000/token", {
+  return fetch(`${import.meta.env.VITE_API_SERVICES_URL}/token`, {
     method: "POST",
     headers: {
       "Content-type": "application/x-www-form-urlencoded",
@@ -349,13 +357,16 @@ export async function fetchBucketData(
   setBucketInfo,
   navigate
 ) {
-  return fetch(`http://localhost:8000/api/v1/bucket/${bucketID}`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/bucket/${bucketID}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("403");
@@ -400,14 +411,17 @@ export async function addItemToBucket(
   formDetails,
   navigate
 ) {
-  return fetch(`http://localhost:8000/api/v1/add_item_to_bucket/${bucketID}`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-    body: JSON.stringify(formDetails),
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/add_item_to_bucket/${bucketID}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+      body: JSON.stringify(formDetails),
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -449,14 +463,17 @@ export async function updateItemInBucket(
   setChecklist,
   navigate
 ) {
-  return fetch(`http://localhost:8000/api/v1/update_item/${itemID}`, {
-    method: "PATCH",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-    body: JSON.stringify(formDetails),
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/update_item/${itemID}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+      body: JSON.stringify(formDetails),
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -492,12 +509,15 @@ export async function updateItemInBucket(
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function deleteItemFromBucket(itemID, setChecklist, navigate) {
-  return fetch(`http://localhost:8000/api/v1/delete_item/${itemID}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + fetchToken(),
-    },
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/delete_item/${itemID}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + fetchToken(),
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
@@ -532,13 +552,16 @@ export async function deleteItemFromBucket(itemID, setChecklist, navigate) {
  * @param {Function} navigate - Function to navigate to a different route.
  */
 export async function getCurrentUser(setCurrentUser, navigate) {
-  return fetch("http://localhost:8000/api/v1/auth/current_user", {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: "Bearer " + fetchToken(),
-    },
-  })
+  return fetch(
+    `${import.meta.env.VITE_API_SERVICES_URL}/api/v1/auth/current_user`,
+    {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + fetchToken(),
+      },
+    }
+  )
     .then((response) => {
       if (response.status === 403) {
         throw new Error("Must Login Again");
