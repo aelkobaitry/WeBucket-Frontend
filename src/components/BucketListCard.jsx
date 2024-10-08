@@ -81,17 +81,6 @@ function BucketListCard({ bucket, setBuckets }) {
                 src={avatar2}
               />
             ))}
-            {/* <Avatar sx={{ width: 32, height: 32 }} src={avatar2} />
-            <Avatar
-              sx={{
-                position: "absolute",
-                top: 8.5,
-                right: 100,
-                width: 32,
-                height: 32,
-              }}
-              src={avatar1}
-            /> */}
             <IconButton
               size="small"
               onClick={(event) => setAnchorEl(event.currentTarget)}

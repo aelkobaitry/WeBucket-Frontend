@@ -4,7 +4,6 @@ import activityIcon from "../assets/icons/plane.png";
 import foodIcon from "../assets/icons/pizza.png";
 import mediaIcon from "../assets/icons/dice.png";
 import avatar1 from "../assets/avatar-test-1.png";
-// import avatar2 from "../assets/avatar-test-2.png";
 import { useNavigate } from "react-router-dom";
 import ViewCompletedItemModal from "./modals/ViewCompletedItemModal";
 import { deleteItemFromBucket, updateItemInBucket } from "../store/Fetch.js";

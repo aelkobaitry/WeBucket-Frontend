@@ -84,6 +84,7 @@ const ViewCompletedItemModal = ({
               <button
                 onClick={() => {
                   setNewComment(item.comments[currentUser.username]);
+                  setNewRating(item.ratings[currentUser.username]);
                   onClose();
                 }}
                 className="px-6 py-2 mr-4 text-sm transition-transform duration-100 rounded-full border-mainPurple bg-midnight text-mainPurple custom-shadow active:scale-95"

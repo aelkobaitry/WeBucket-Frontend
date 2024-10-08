@@ -118,7 +118,8 @@ export async function deleteBucket(bucketID, setBuckets, navigate) {
       if (data.detail) {
         throw new Error(data.detail);
       } else {
-        setBuckets(data);
+        if (setBuckets) setBuckets(data);
+        else navigate("/home");
         MinorToast("Success!", "Bucket removed successfully.");
       }
     })
@@ -191,7 +192,8 @@ export async function updateBucket(
   bucketID,
   updatedData,
   setBucketContent,
-  navigate
+  navigate,
+  bucketPage = false
 ) {
   return fetch(`http://localhost:8000/api/v1/update_bucket/${bucketID}`, {
     method: "PATCH",
@@ -211,8 +213,13 @@ export async function updateBucket(
       if (data.detail) {
         throw new Error(data.detail);
       } else {
-        setBucketContent(data);
-        MinorToast("Success!", "Bucket detail updated successfully.");
+        if (!bucketPage) {
+          setBucketContent(data);
+        } else {
+          const selectedBucket = data.find(bucket => bucket.id === bucketID);
+          setBucketContent(selectedBucket);
+        }
+        MinorToast("Success!", "Bucket updated successfully.");
       }
     })
     .catch((error) => {

@@ -56,7 +56,7 @@ DeleteBucketModal.propTypes = {
   setOpen: PropTypes.func.isRequired,
   setAnchorEl: PropTypes.func.isRequired,
   bucketID: PropTypes.string.isRequired,
-  setBuckets: PropTypes.func.isRequired,
+  setBuckets: PropTypes.func,
 };
 
 export default DeleteBucketModal;

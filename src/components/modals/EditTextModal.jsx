@@ -37,7 +37,7 @@ const EditTextModal = ({ open, text, setText, handleCloseModal }) => {
 
 EditTextModal.propTypes = {
   open: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   setText: PropTypes.func.isRequired,
   handleCloseModal: PropTypes.func.isRequired,
 };
