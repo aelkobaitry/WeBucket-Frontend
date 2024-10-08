@@ -8,7 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import RootPage from "./pages/RootPage";
 import { Toaster } from "react-hot-toast";
-import CompletedPage from "./pages/CompletedPage.jsx";
+import BucketPage from "./pages/BucketPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -55,11 +55,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "completed",
+    path: "bucket/:bucketID",
     element: (
       <RequireToken>
-        <CompletedPage />
+        <BucketPage />
         <Stars />
+        <Toaster />
       </RequireToken>
     ),
     errorElement: <ErrorPage />,
