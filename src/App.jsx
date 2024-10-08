@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import RootPage from "./pages/RootPage";
 import { Toaster } from "react-hot-toast";
 import BucketPage from "./pages/BucketPage.jsx";
+import SignupPage from "./pages/SignupPage";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,17 @@ const router = createBrowserRouter([
     element: (
       <>
         <LoginPage />
+        <Stars />
+        <Toaster />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "signup",
+    element: (
+      <>
+        <SignupPage />
         <Stars />
         <Toaster />
       </>
