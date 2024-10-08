@@ -9,7 +9,6 @@ const ConfirmEmailModal = ({ open, setOpen, code, handleCorrectCode }) => {
 
   const handleModalClose = () => {
     const enteredCode = inputs.join("");
-    console.log(code, enteredCode);
 
     if (enteredCode === code.toString()) {
       setOpen(false);

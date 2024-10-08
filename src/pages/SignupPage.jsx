@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import MinorToast from "../components/modals/MinorToast";
-import { createUser } from "../store/Fetch";
+import { createUser, verifyUniqueUser } from "../store/Fetch";
 import emailjs from "@emailjs/browser";
 import ConfirmEmailModal from "../components/modals/ConfirmEmail";
 
@@ -47,6 +47,11 @@ function SignupPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const unique = await verifyUniqueUser({username: username, email: email});
+    if (!unique) {
+      return;
+    }
 
     const generatedCode = Math.floor(100000 + Math.random() * 900000);
     setCode(generatedCode);
@@ -68,7 +73,6 @@ function SignupPage() {
       //replace with webucket template code and email service
       (result) => {
         setShowModal(true);
-        console.log(result.text);
       },
       (error) => {
         alert("Failed to send email. Please try again later.");
@@ -184,7 +188,7 @@ function SignupPage() {
         <label class="text-hoverPurple text-xs pb-4 leading-3 mt-2">
           Already have an account?
           <Link class="hover:underline" to="/login">
-            Log in
+            {" "}Log in
           </Link>
         </label>
       </form>

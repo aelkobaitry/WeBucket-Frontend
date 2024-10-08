@@ -8,7 +8,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("fetching profile data");
     fetch("http://localhost:8000/api/v1/auth/current_user", {
       method: "GET",
       headers: {

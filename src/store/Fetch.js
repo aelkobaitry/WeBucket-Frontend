@@ -236,15 +236,15 @@ export async function updateBucket(
 }
 
 /**
- * Attempts to create a new user
+ * Checks if a username and email are unique
  *
  * @param {Object} formDetails - The login form details.
  */
-export async function createUser(formDetails, navigate) {
+export async function verifyUniqueUser(formDetails) {
   return fetch(
-    `http://localhost:8000/api/v1/add_user?username=${formDetails.username}&firstname=${formDetails.firstname}&lastname=${formDetails.lastname}&email=${formDetails.email}&password=${formDetails.password}`,
+    `http://localhost:8000/api/v1/verify_unique_user?username=${formDetails.username}&email=${formDetails.email}`,
     {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-type": "application/json",
       },
@@ -255,8 +255,43 @@ export async function createUser(formDetails, navigate) {
       if (data.detail) {
         throw new Error(data.detail);
       }
+      return true
+    })
+    .catch((error) => {
+      if (error.message) {
+        MinorToast("Error!", error.message);
+      } else {
+        MinorToast("Error!", "error");
+        console.log(error);
+      }
+    });
+}
+
+
+/**
+ * Attempts to create a new user
+ *
+ * @param {Object} formDetails - The login form details.
+ */
+export async function createUser(formDetails, navigate) {
+  return fetch(
+    `http://localhost:8000/api/v1/add_user`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(formDetails),
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.detail) {
+        throw new Error(data.detail);
+      }
       toast.remove();
       navigate("/login");
+      MinorToast("Success!", "Your account was created.")
     })
     .catch((error) => {
       if (error.message) {

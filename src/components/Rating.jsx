@@ -97,7 +97,6 @@ export default function Rating({
                 className="h-5/6 w-auto max-h-10 cursor-pointer duration-300 hover:scale-110"
                 onMouseEnter={() => {
                   finalRating.current === null && setRating(index + 1);
-                  console.log(finalRating.current);
                 }}
                 onMouseLeave={() => {
                   finalRating.current === null && index === 0 && setRating(0);
