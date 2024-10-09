@@ -73,3 +73,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Env
+.env

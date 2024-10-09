@@ -25,10 +25,13 @@ const Stars = () => {
     },
     fullScreen: {
       enable: true,
-      zIndex: -1,
     },
   };
-  return <Particles id="tsparticles" init={particlesInit} options={options} />;
+  return (
+    <div className="-z-50">
+      <Particles id="tsparticles" init={particlesInit} options={options} />
+    </div>
+  );
 };
 
 export default Stars;
