@@ -6,6 +6,7 @@ import {
   setEarlyAccessToken,
 } from "../store/EarlyAccess";
 import logo from "../assets/Logo.svg";
+import DateCountdown from "react-date-countdown-timer";
 
 function EarlyAccessPage() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function EarlyAccessPage() {
             >
               Do you have an early access code?
               <input
-                className="flex p-3 mt-3 bg-transparent border-2 rounded-md w-96 border-purple-950 text-light-purple"
+                className="flex p-3 mt-3 bg-transparent border-2 rounded-md w-96 border-light-purple text-light-purple"
                 type="text"
                 onChange={(e) => setAccessCode(e.target.value)}
                 placeholder="Enter code"
@@ -56,21 +57,29 @@ function EarlyAccessPage() {
             onClick={() => setShowContact(!showContact)}
             id="contact"
           >
-            Request Access
+            Request Early Access
           </a>
+          <div className="fixed text-4xl mb-9 text-mainPurple bottom-14 ">
+            <DateCountdown
+              dateTo="November 01, 2024 00:00:00 GMT-0400"
+              noAnimate={false}
+              locales={[":", ":", ":", ":", ":"]}
+              locales_plural={[":", ":", ":", ":", ":"]}
+            />
+          </div>
           {showContact ? (
             <div className="pt-4 pb-14">
               <form
                 action="https://getform.io/f/azyldqdb"
                 method="POST"
                 encType="multipart/form-data"
-                className="text-[#A778AF] font-light text-xl"
+                className="text-xl font-light"
               >
                 <div className="grid w-full gap-4 py-2 md:grid-cols-2">
                   <div className="flex flex-col">
                     <label className="py-2 text-sm">Name</label>
                     <input
-                      className="flex p-3 bg-transparent border-2 rounded-md border-purple-950"
+                      className="flex p-3 bg-transparent border-2 rounded-md border-medium-purple text-light-purple"
                       type="text"
                       name="name"
                     />
@@ -78,7 +87,7 @@ function EarlyAccessPage() {
                   <div className="flex flex-col">
                     <label className="py-2 text-sm">Phone number</label>
                     <input
-                      className="flex p-3 bg-transparent border-2 rounded-md border-purple-950"
+                      className="flex p-3 bg-transparent border-2 rounded-md border-medium-purple text-light-purple"
                       type="text"
                       name="phone"
                     />
@@ -87,7 +96,7 @@ function EarlyAccessPage() {
                 <div className="flex flex-col py-2">
                   <label className="py-2 text-sm">Email</label>
                   <input
-                    className="flex p-3 bg-transparent border-2 rounded-md border-purple-950"
+                    className="flex p-3 bg-transparent border-2 rounded-md border-medium-purple text-light-purple"
                     type="email"
                     name="email"
                   />
@@ -95,7 +104,7 @@ function EarlyAccessPage() {
                 <div className="flex flex-col py-2">
                   <label className="py-2 text-sm">Reason</label>
                   <textarea
-                    className="flex p-3 bg-transparent border-2 rounded-md border-purple-950"
+                    className="flex p-3 bg-transparent border-2 rounded-md border-medium-purple text-light-purple"
                     rows="3"
                     name="message"
                   />
