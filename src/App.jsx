@@ -6,18 +6,21 @@ import { RequireToken } from "./store/Auth";
 import LoginPage from "./pages/LoginPage";
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
-import RootPage from "./pages/RootPage";
-import { Toaster } from "react-hot-toast";
 import BucketPage from "./pages/BucketPage.jsx";
 import SignupPage from "./pages/SignupPage";
+import { Toaster } from "react-hot-toast";
+
+import { RequireEarlyAccessToken } from "./store/EarlyAccess";
+import EarlyAccessPage from "./pages/AccessPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <>
-        <RootPage />
+        <EarlyAccessPage />
         <Stars />
+        <Toaster />
       </>
     ),
     errorElement: <ErrorPage />,
@@ -36,22 +39,22 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: (
-      <>
+      <RequireEarlyAccessToken>
         <LoginPage />
         <Stars />
         <Toaster />
-      </>
+      </RequireEarlyAccessToken>
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "signup",
     element: (
-      <>
+      <RequireEarlyAccessToken>
         <SignupPage />
         <Stars />
         <Toaster />
-      </>
+      </RequireEarlyAccessToken>
     ),
     errorElement: <ErrorPage />,
   },

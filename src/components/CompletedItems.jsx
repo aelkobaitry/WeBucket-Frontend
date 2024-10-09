@@ -7,6 +7,7 @@ import avatar1 from "../assets/avatar-test-1.png";
 import { useNavigate } from "react-router-dom";
 import ViewCompletedItemModal from "./modals/ViewCompletedItemModal";
 import { deleteItemFromBucket, updateItemInBucket } from "../store/Fetch.js";
+import Footer from "./Footer";
 
 /**
  * Represents a list of completed items in a bucket.
@@ -98,74 +99,77 @@ function CompletedItems({
           </tr>
         </thead>
       </table>
-      <table className="overflow-y-auto max-h-[55vh] w-full overflow-x-auto">
-        <tbody>
-          {rows
-            .filter((row) => row.complete)
-            .map((row) => (
-              <tr
-                className="min-w-full text-sm bg-transparent border-b-2 border-b-medium-dark-purple"
-                key={row.id}
-              >
-                <td className="px-2 py-3 align-top w-[5%]">
-                  <div className="flex items-center w-8">
-                    <img
-                      src={
-                        row.item_type === "activity"
-                          ? activityIcon
-                          : row.item_type === "food"
-                            ? foodIcon
-                            : mediaIcon
-                      }
-                      alt={`${row.item_type}-icon`}
-                    />
-                  </div>
-                </td>
-                <td className="px-6 py-3 align-top w-[12%]">{row.title}</td>
-                <td className="px-6 py-3 align-top w-[23%]">
-                  {row.description}
-                </td>
-                <td className="px-6 py-3 align-top w-[40%]">
-                  {Object.keys(row.comments).map((key) => (
-                    <div key={key} className="flex-col items-center">
-                      <p className="font-medium text-[#fbd3d3] text-base">
-                        {key}
-                      </p>
-                      <p className="ml-2 text-light-purple">
-                        {row.comments[key]}
-                      </p>
-                    </div>
-                  ))}
-                </td>
-                <td className="px-6 py-3 align-top w-[10%] flex-col flex items-end">
-                  {Object.keys(row.ratings).map((key) => (
-                    <div
-                      key={key}
-                      className="flex items-center w-8 mt-1 space-x-2"
-                    >
-                      <p className="text-sm text-light-purple">{`${row.ratings[key]}/5`}</p>
+      <div className="overflow-y-auto max-h-[55vh] w-full pb-5">
+        <table className="w-full overflow-x-auto">
+          <tbody>
+            {rows
+              .filter((row) => row.complete)
+              .map((row) => (
+                <tr
+                  className="min-w-full text-sm bg-transparent border-b-2 border-b-medium-dark-purple"
+                  key={row.id}
+                >
+                  <td className="px-2 py-3 align-top w-[5%]">
+                    <div className="flex items-center w-8">
                       <img
-                        src={avatar1}
-                        alt="pfp-1"
-                        className="w-auto rounded-full h-5/6"
+                        src={
+                          row.item_type === "activity"
+                            ? activityIcon
+                            : row.item_type === "food"
+                              ? foodIcon
+                              : mediaIcon
+                        }
+                        alt={`${row.item_type}-icon`}
                       />
                     </div>
-                  ))}
-                </td>
-                <td className="px-6 py-3.5 w-[10%] align-top">
-                  <div className="flex items-center">
-                    <button
-                      onClick={() => handleShowItemModal(row)}
-                      className="px-3 py-1.5 transition-transform duration-200 bg-transparent border-2 border-light-purple hover:scale-105 active:scale-95"
-                    >
-                      Details
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                  </td>
+                  <td className="px-6 py-3 align-top w-[12%]">{row.title}</td>
+                  <td className="px-6 py-3 align-top w-[23%]">
+                    {row.description}
+                  </td>
+                  <td className="px-6 py-3 align-top w-[40%]">
+                    {Object.keys(row.comments).map((key) => (
+                      <div key={key} className="flex-col items-center">
+                        <p className="font-medium text-[#fbd3d3] text-base">
+                          {key}
+                        </p>
+                        <p className="ml-2 text-light-purple">
+                          {row.comments[key]}
+                        </p>
+                      </div>
+                    ))}
+                  </td>
+                  <td className="px-6 py-3 align-top w-[10%] flex-col flex items-end">
+                    {Object.keys(row.ratings).map((key) => (
+                      <div
+                        key={key}
+                        className="flex items-center w-8 mt-1 space-x-2"
+                      >
+                        <p className="text-sm text-light-purple">{`${row.ratings[key]}/5`}</p>
+                        <img
+                          src={avatar1}
+                          alt="pfp-1"
+                          className="w-auto rounded-full h-5/6"
+                        />
+                      </div>
+                    ))}
+                  </td>
+                  <td className="px-6 py-3.5 w-[10%] align-top">
+                    <div className="flex items-center">
+                      <button
+                        onClick={() => handleShowItemModal(row)}
+                        className="px-3 py-1.5 transition-transform duration-200 bg-transparent border-2 border-light-purple hover:scale-105 active:scale-95"
+                      >
+                        Details
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        <Footer />
+      </div>
       <ViewCompletedItemModal
         open={showItemModal}
         item={updateItem}
