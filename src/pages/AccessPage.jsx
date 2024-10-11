@@ -30,15 +30,19 @@ function EarlyAccessPage() {
         <Navigate to={"/login"} />
       ) : (
         <>
-          <div className="flex flex-row items-center justify-center">
-            <img src={logo} className="mr-24 w-28" alt="WeBucket Logo" />
+          <div className="flex flex-col items-center justify-center md:flex-row">
+            <img
+              src={logo}
+              className="pt-10 mb-5 md:mr-24 w-28"
+              alt="WeBucket Logo"
+            />
             <form
               className="relative flex flex-col text-xl font-light text-light-purple"
               onSubmit={handleSubmit}
             >
               Do you have an early access code?
               <input
-                className="flex p-3 mt-3 bg-transparent border-2 rounded-md w-96 border-light-purple text-light-purple"
+                className="flex w-full p-3 mt-3 bg-transparent border-2 rounded-md sm:w-96 border-light-purple text-light-purple"
                 type="text"
                 onChange={(e) => setAccessCode(e.target.value)}
                 placeholder="Enter code"
@@ -52,14 +56,14 @@ function EarlyAccessPage() {
             </form>
           </div>
           <a
-            className="text-[#A778AF] font-light text-xl mt-20 bottom-14 fixed"
+            className="text-[#A778AF] font-light text-xl mt-5 md:mt-20 md:bottom-14 relative md:fixed"
             href="#contact"
             onClick={() => setShowContact(!showContact)}
             id="contact"
           >
             Request Early Access
           </a>
-          <div className="fixed text-4xl mb-9 text-mainPurple bottom-14 ">
+          <div className="relative text-4xl mb-9 text-mainPurple md:bottom-14 md:fixed">
             <DateCountdown
               dateTo="November 01, 2024 00:00:00 GMT-0400"
               noAnimate={false}
@@ -68,7 +72,7 @@ function EarlyAccessPage() {
             />
           </div>
           {showContact ? (
-            <div className="pt-4 pb-14">
+            <div className="relative pb-14">
               <form
                 action="https://getform.io/f/azyldqdb"
                 method="POST"
